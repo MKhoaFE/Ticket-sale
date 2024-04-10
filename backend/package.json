@@ -1,23 +1,63 @@
 {
-    "name": "backend",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-        "start": "node index.js",
-        "dev": "nodemon index.js"
+    "parserOptions": {
+        "ecmaVersion": 11,
+        "sourceType": "module"
     },
-    "author": "",
+    "name": "ticket-sale-backend",
+    "version": "1.0.0",
+    "description": "Coding API for futabus website",
+    "main": "app.js",
+    "scripts": {
+        "start": "node server.js",
+        "start:dev": "nodemon server.js",
+        "start:prod": "SET NODE_ENV=production&&nodemon src/server.js",
+        "debug": "ndb src/server.js"
+    },
+    "keywords": [],
     "license": "ISC",
     "dependencies": {
-        "bcrypt": "^5.1.1",
-        "body-parser": "^1.20.2",
+        "axios": "^1.4.0",
+        "cloudinary": "^1.40.0",
         "cookie-parser": "^1.4.6",
         "cors": "^2.8.5",
+        "crypto-js": "^4.1.1",
+        "dotenv": "^16.3.1",
         "express": "^4.18.2",
+        "express-handlebars": "^7.1.2",
+        "express-rate-limit": "^6.8.0",
         "express-session": "^1.17.3",
-        "img": "^3.0.3",
+        "google-auth-library": "^9.0.0",
+        "googleapis": "^124.0.0",
+        "helmet": "^7.0.0",
+        "hpp": "^0.2.3",
+        "jsonwebtoken": "^9.0.1",
         "moment": "^2.29.4",
-        "mssql": "^9.1.1"
+        "morgan": "^1.10.0",
+        "mssql": "^9.1.1",
+        "multer": "^1.4.5-lts.1",
+        "multer-storage-cloudinary": "^4.0.0",
+        "node-cron": "^3.0.2",
+        "nodemailer": "^6.9.4",
+        "nodemon": "^3.0.1",
+        "openrouteservice-js": "^0.3.1",
+        "passport": "^0.7.0",
+        "passport-facebook": "^3.0.0",
+        "passport-google-oauth20": "^2.0.0",
+        "passport-strategy": "^1.0.0",
+        "xss-clean": "^0.1.4"
+    },
+    "devDependencies": {
+        "eslint": "^8.45.0",
+        "eslint-config-airbnb": "^19.0.4",
+        "eslint-config-prettier": "^8.9.0",
+        "eslint-plugin-import": "^2.28.0",
+        "eslint-plugin-jsx-a11y": "^6.7.1",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-prettier": "^5.0.0",
+        "eslint-plugin-react": "^7.33.0",
+        "prettier": "^3.0.0"
+    },
+    "engines": {
+        "node": ">=18"
     }
 }
