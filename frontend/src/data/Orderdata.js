@@ -1,0 +1,73 @@
+const orderdata = [
+    {
+        orderid: "1",        
+        user: "nguyenchithuan55@gmail.com",
+        address: "53 Đ. Quảng Hàm, Phường 5, Gò Vấp, Thành phố Hồ Chí Minh",
+        status: "Processing",
+        detail: "Confirm",
+      },
+      {
+        orderid: "2",        
+        user: "nguyenchithuan55@gmail.com",
+        address: "53 Đ. Quảng Hàm, Phường 5, Gò Vấp, Thành phố Hồ Chí Minh",
+        status: "Processing",
+        detail: "Confirm",
+      },
+      {
+        orderid: "3",        
+        user: "nguyenchithuan55@gmail.com",
+        address: "53 Đ. Quảng Hàm, Phường 5, Gò Vấp, Thành phố Hồ Chí Minh",
+        status: "Processing",
+        detail: "Confirm",
+      },
+      {
+        orderid: "4",        
+        user: "nguyenchithuan55@gmail.com",
+        address: "53 Đ. Quảng Hàm, Phường 5, Gò Vấp, Thành phố Hồ Chí Minh",
+        status: "Processing",
+        detail: "Confirm",
+      },
+      {
+        orderid: "5",        
+        user: "nguyenchithuan55@gmail.com",
+        address: "53 Đ. Quảng Hàm, Phường 5, Gò Vấp, Thành phố Hồ Chí Minh",
+        status: "Processing",
+        detail: "Confirm",
+      },
+      {
+        orderid: "6",        
+        user: "nguyenchithuan55@gmail.com",
+        address: "53 Đ. Quảng Hàm, Phường 5, Gò Vấp, Thành phố Hồ Chí Minh",
+        status: "Processing",
+        detail: "Confirm",
+      },
+      {
+        orderid: "7",        
+        user: "nguyenchithuan55@gmail.com",
+        address: "53 Đ. Quảng Hàm, Phường 5, Gò Vấp, Thành phố Hồ Chí Minh",
+        status: "Processing",
+        detail: "Confirm",
+      },
+      {
+        orderid: "8",        
+        user: "nguyenchithuan55@gmail.com",
+        address: "53 Đ. Quảng Hàm, Phường 5, Gò Vấp, Thành phố Hồ Chí Minh",
+        status: "Processing",
+        detail: "Confirm",
+      },
+      {
+        orderid: "9",        
+        user: "nguyenchithuan55@gmail.com",
+        address: "53 Đ. Quảng Hàm, Phường 5, Gò Vấp, Thành phố Hồ Chí Minh",
+        status: "Processing",
+        detail: "Confirm",
+      },
+      {
+        orderid: "10",        
+        user: "nguyenchithuan55@gmail.com",
+        address: "53 Đ. Quảng Hàm, Phường 5, Gò Vấp, Thành phố Hồ Chí Minh",
+        status: "Processing",
+        detail: "Confirm",
+      },
+];
+export default orderdata;

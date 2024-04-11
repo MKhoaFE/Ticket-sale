@@ -26,7 +26,7 @@ exports.getStatistic = catchAsync(async (req, res, next) => {
     const JSONtotalMonthlyRevenue = JSON.stringify(totalMonthlyRevenue);
 
     user.avatarPath = user.avatarPath || '/assets/img/account_icon.svg';
-    res.render('statistic/statistic', {
+    res.send({
         headerName: 'Thống kê',
         title:'Statistic',
         statistic: true,

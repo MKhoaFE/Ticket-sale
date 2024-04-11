@@ -34,7 +34,7 @@ exports.getMyAccount = catchAsync(async (req, res, next) => {
     const indexOfPage = url.lastIndexOf('&page');
     const newUrl = indexOfPage !== -1 ? url.substring(0, indexOfPage) : url;
 
-    res.render('account/user_account', {
+    res.send({
         title: detailedUser.recordset[0].userName,
         user: detailedUser.recordset[0],
         link: newUrl,
@@ -70,7 +70,7 @@ exports.getUser = catchAsync(async (req, res, next) => {
     )
         .subtract(7, 'hours')
         .format('YYYY-MM-DD');
-    res.render('account/crud_user_detail', {
+    res.send({
         title: 'Chi tiết tài khoản',
         navbar: () => 'empty',
         footer: () => 'empty',
@@ -111,7 +111,7 @@ exports.getAllUsers = catchAsync(async (req, res, next) => {
         avatarPath: el.avatarPath || '/assets/img/account_icon.svg',
     }));
     user.avatarPath = user.avatarPath || '/assets/img/account_icon.svg';
-    res.render('account/crud_users_list', {
+    res.send({
         headerName: 'Danh sách tài khoản',
         account: true,
         title: 'User management',
@@ -133,7 +133,7 @@ exports.getAllUsers = catchAsync(async (req, res, next) => {
 });
 
 exports.getCreateUserPage = catchAsync(async (req, res, next) => {
-    res.render('account/crud_add_user', {
+    res.send({
         title: 'Thêm user',
         navbar: () => 'empty',
         footer: () => 'empty',
