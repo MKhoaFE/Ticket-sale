@@ -11,16 +11,15 @@ function App() {
         <div className="App">
             <Router>
                 <Routes>
-                    <Route path="/" element={<ManageProduct />} />
                     <Route path="/login" element={<Login />} />
-                    <Route path="/register" element={<Register />} />
+                    {/* <Route path="/register" element={<Register />} />
                     <Route
                         path="/Managecustomer"
                         element={<Managecustomer />}
                     />
                     <Route path="/Profile" element={<Profile />} />
                     <Route path="/Revenue" element={<Revenue />} />
-                    <Route path="/User" element={<User />} />
+                    <Route path="/User" element={<User />} /> */}
                     {/* <Route path="/login" element={<Login/>}/>
           <Route path="/ManageProduct" element={<ManageProduct/>}/>
           <Route path="/login" element={<Login/>}/>
