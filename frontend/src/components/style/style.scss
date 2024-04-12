@@ -1,0 +1,149 @@
+.header {
+  padding: 0;
+  padding-bottom: 0.5rem;
+  @media (max-width: 768px) {
+    flex-direction: row;
+    padding: 0.5rem 1rem !important;
+  }
+}
+.language {
+  @media (max-width: 768px) {
+    display: none !important;
+  }
+}
+.flex-row-reverse {
+  @media (max-width: 768px) {
+    flex-direction: row !important;
+  }
+}
+.header-res {
+  @media (max-width: 768px) {
+    flex-direction: row-reverse !important;
+    display: flex;
+    flex-wrap: nowrap !important;
+  }
+}
+.logo {
+  color: black !important;
+  letter-spacing: 0.3rem;
+  font-weight: 600;
+  font-size: 32px;
+  border-top: 50px solid white;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  height: 100%;
+  width: 500px !important;
+  font-family: "Whisper", cursive;
+  font-weight: 400;
+  font-style: normal;
+  @media (max-width: 768px) {
+    width: 300px !important;
+  }
+  .test {
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+}
+.login {
+  background-color: white;
+  color: black !important;
+  border-radius: 1rem;
+  padding: 15px !important;
+  border: none;
+  background-color: white;
+  @media (max-width: 768px) {
+    text-align: center;
+  }
+}
+.btn-primary:hover {
+  background-color: white;
+}
+
+.title {
+  display: none;
+}
+
+.navbar-expand-lg .navbar-nav .nav-link {
+  padding: 0 !important;
+  color: white;
+}
+
+.active {
+  color: black;
+  border-bottom: 2px solid black;
+}
+
+.footer {
+  .wrapper {
+    width: 100%;
+    padding: 2rem 0;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    @media (max-width: 768px) {
+      display: block;
+    }
+    .area-text-left {
+      width: 60%;
+      display: block;
+      @media (max-width: 768px) {
+        width: 100%;
+      }
+      .top {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        .left {
+          width: 60%;
+          @media (max-width: 768px) {
+            width: 100%;
+          }
+          span {
+            color: #ffa500;
+            font-size: 2rem;
+            font-weight: 600;
+          }
+        }
+        .right {
+          width: 40%;
+          @media (max-width: 768px) {
+            width: 100%;
+          }
+          img {
+            width: 80%;
+          }
+        }
+      }
+      .bottom {
+        width: 80%;
+        @media (max-width:768px) {
+          width: 100%;
+        }
+        .p-flex {
+          width: 100%;
+          p {
+            width: 50%;
+          }
+          @media (max-width: 768px) {
+            width: 100%;
+          }
+        }
+      }
+    }
+    .area-text-right{
+      gap: 2rem;
+      width: 40%;
+      display: flex;
+      @media (max-width:768px) {
+        display: flex;
+        width: 100%;
+      }
+
+    }
+  }
+}
