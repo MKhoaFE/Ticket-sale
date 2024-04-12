@@ -1,7 +1,6 @@
 const path = require("path");
 const express = require("express");
 
-const expressHandlebars = require("express-handlebars");
 const rateLimit = require("express-rate-limit");
 
 const cookieParser = require("cookie-parser");
@@ -11,9 +10,6 @@ const AppError = require("./utils/appError");
 const globalErrorHandler = require("./controllers/errorController");
 const router = require("./routes");
 
-// Solve self signed certificate error
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
-
 // Start express app
 const app = express();
 
@@ -21,12 +17,7 @@ app.set("trust proxy", true);
 
 // 1) GLOBAL MIDDLEWARES
 // Implement CORS
-const corsOptions = {
-    origin: [config.BANK_URL],
-    credentials: true,
-};
-app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
+app.use(cors());
 
 
 
