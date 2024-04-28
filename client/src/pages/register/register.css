@@ -1,0 +1,49 @@
+.register {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('../../assets/images/login-background.jpg');
+    background-size: cover;
+  }
+  
+  .register-container {
+    width: 400px;
+    height: 700px;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px ;
+    
+  }
+
+  input {
+    margin: 5px 0 5px 0;
+  }
+
+  .rContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .rInput{
+    height: 30px;
+    padding: 10px;
+  }
+  
+  .rButton {
+    border: none;
+    padding: 10px 20px;
+    background-color: #0071c2;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .rButton:disabled{
+    background-color: #0071c28c;
+    cursor: not-allowed;
+  }

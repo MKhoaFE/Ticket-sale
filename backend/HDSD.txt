@@ -1,1 +1,0 @@
-mở terminal chạy lệnh: node server.js
