@@ -12,43 +12,46 @@ const config = {
         database: process.env.DB_NAME,
     },
 
-    NO_TOKEN_URL: ['/auth', '/location', '/category', '/product'],
+    MONGODB_URL: process.env.MONGODB_URL,
+    MONGODB_NAME: process.env.MONGODB_NAME,
+
+    NO_TOKEN_URL: ["/auth", "/location", "/category", "/product"],
 
     priceRanges: [
         {
-            price: 'all',
-            title: 'Tất cả',
+            price: "all",
+            title: "Tất cả",
         },
         {
-            price: '0,150000',
-            title: '0 - 150.000 VNĐ',
+            price: "0,150000",
+            title: "0 - 150.000 VNĐ",
         },
         {
-            price: '150000,300000',
-            title: '150.000 - 300.000 VNĐ',
+            price: "150000,300000",
+            title: "150.000 - 300.000 VNĐ",
         },
         {
-            price: '300000,450000',
-            title: '300.000 - 450.000 VNĐ',
+            price: "300000,450000",
+            title: "300.000 - 450.000 VNĐ",
         },
         {
-            price: '450000,600000',
-            title: '450.000 - 600.000 VNĐ',
+            price: "450000,600000",
+            title: "450.000 - 600.000 VNĐ",
         },
     ],
 
     sortList: [
         {
-            value: 'book_discounted_price',
-            title: 'Giá bán',
+            value: "book_discounted_price",
+            title: "Giá bán",
         },
         {
-            value: '-avg_rating',
-            title: 'Rating trung bình',
+            value: "-avg_rating",
+            title: "Rating trung bình",
         },
         {
-            value: '-discounted_number',
-            title: 'Chiết khấu',
+            value: "-discounted_number",
+            title: "Chiết khấu",
         },
     ],
 
@@ -70,15 +73,15 @@ const config = {
     },
 
     payment: {
-        PAYPAL: 'PayPal',
-        MOMO: 'MoMo',
-        COD: 'COD',
+        PAYPAL: "PayPal",
+        MOMO: "MoMo",
+        COD: "COD",
     },
 
     currency: {
-        USD: 'usd',
-        VND: 'vnd',
-        ETH: 'eth',
+        USD: "usd",
+        VND: "vnd",
+        ETH: "eth",
     },
 
     pointChangedType: {

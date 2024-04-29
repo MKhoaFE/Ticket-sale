@@ -7,12 +7,7 @@ const config = require('../config/config');
 
 exports.getStatistic = catchAsync(async (req, res, next) => {
     const { user, cart, categoryTree } = req;
-    const isLoggedIn = req.isAuthenticated();
-
-    let isAdmin = false;
-    if (isLoggedIn) {
-        isAdmin = user.role === config.role.ADMIN;
-    }
+    //const isLoggedIn = req.isAuthenticated();
 
     const SOrdernRevenue = await statisticModel.getSOrdernRevenue();
     SOrdernRevenue.totalRevenue =
