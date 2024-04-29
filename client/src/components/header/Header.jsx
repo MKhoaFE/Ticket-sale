@@ -15,6 +15,9 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { SearchContext } from "../../context/SearchContext";
 import { AuthContext } from "../../context/AuthContext";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import logo from '../../assets/images/BG_1.png'
+
 
 const Header = ({ type }) => {
   const [destination, setDestination] = useState("");
@@ -53,17 +56,14 @@ const Header = ({ type }) => {
   };
 
   return (
-    <div className="header">
+    <div className="header container">
       <div
         className={
           type === "list" ? "headerContainer listMode" : "headerContainer"
         }
       >
         <div className="headerList">
-          <div onClick={() => navigate("/")} className="headerListItem active">
-            <FontAwesomeIcon icon={faBed} />
-            <span>Stays</span>
-          </div>
+
           {user && <div onClick={() => navigate("/booking")} className="headerListItem active">
             <FontAwesomeIcon icon={faBook}/>
             <span>Booking List</span>
@@ -72,10 +72,13 @@ const Header = ({ type }) => {
         
         {type !== "list" && (
           <>
-            <h1 className="headerTitle">
+          <div className="image1" >
+            <img src={logo} alt="" />
+          </div>
+            {/* <h1 className="headerTitle">
               Welcome To Our 19HTTT4 Website
             </h1>
-            <h2 className="headerTitle2">-------Hotel-------</h2>
+            <h2 className="headerTitle2">-------Hotel-------</h2> */}
             {/* {!user && <button className="headerBtn">Sign in / Register</button>} */}
             <div className="headerSearch">
               <div className="headerSearchItem">

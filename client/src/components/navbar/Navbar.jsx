@@ -31,9 +31,13 @@ const Navbar = () => {
 
   return (
     <div className="navbar">
-      <div className="navContainer">
+      <div className="container">
+      <div className="navContainer ">
         <Link to="/" style={{color:"inherit", textDecoration:"none"}}>
-        <span className="logo">Hotel Booking</span>
+          <div className="trapzoid">
+          <span className="logo">Futa Bus</span>
+          </div>
+
         </Link>   {/* if there is user show his username otherwise show this div.  */}
         {user ? <div>
           <span>{user.username}</span>
@@ -45,6 +49,8 @@ const Navbar = () => {
           </div>
         )}
       </div>
+      </div>
+
     </div>
   )
 }
