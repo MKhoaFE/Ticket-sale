@@ -14,6 +14,7 @@ import authRoute from "./routes/auth.js";
 import usersRoute from "./routes/users.js";
 import hotelsRoute from "./routes/hotels.js";
 import roomsRoute from "./routes/rooms.js";
+//import statisticRoute from "./routes/statisticRouter.js";
 import bookingsRoute from "./routes/bookings.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
@@ -24,7 +25,7 @@ const connect = async () => {
 
     try {
         // await mongoose.connect(process.env.MONGO);
-        await mongoose.connect("mongodb+srv://phuoc:phuoc@cluster0.vw5ylla.mongodb.net/Hotel-Booking");
+        await mongoose.connect("mongodb://localhost:27017");
     } catch (error) {
         throw error;
     }
@@ -65,6 +66,7 @@ app.use("/api/users", usersRoute);
 app.use("/api/hotels", hotelsRoute);
 app.use("/api/rooms", roomsRoute);
 app.use("/api/bookings", bookingsRoute);
+//app.use("/api/statistic", statisticRoute);
 
 
 
