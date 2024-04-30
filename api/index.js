@@ -24,7 +24,7 @@ const connect = async () => {
 
     try {
         // await mongoose.connect(process.env.MONGO);
-        await mongoose.connect("mongodb+srv://phuoc:phuoc@cluster0.vw5ylla.mongodb.net/Hotel-Booking");
+        await mongoose.connect("mongodb+srv://nhmkhoajob:Minhkhoa0404.@cluster0.1vup4p8.mongodb.net/");
     } catch (error) {
         throw error;
     }
