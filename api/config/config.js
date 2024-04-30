@@ -1,4 +1,5 @@
-require('dotenv').config();
+import dotenv from 'dotenv';
+dotenv.config();
 
 const config = {
     NODE_ENV: process.env.NODE_ENV,
@@ -114,4 +115,4 @@ const config = {
     SHOP_LONG: 106.6823047396491,
 };
 
-module.exports = config;
+export default config;

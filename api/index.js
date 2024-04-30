@@ -18,20 +18,24 @@ import roomsRoute from "./routes/rooms.js";
 import bookingsRoute from "./routes/bookings.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-
+import config from "./config/config.js";
 const app = express();
 
-const connect = async () => {
+// const connect = async () => {
 
-    try {
-        // await mongoose.connect(process.env.MONGO);
-        await mongoose.connect("mongodb://localhost:27017");
-    } catch (error) {
-        throw error;
-    }
-};
+//     try {
+//         // await mongoose.connect(process.env.MONGO);
+//         await mongoose.connect("mongodb://localhost:27017");
+//     } catch (error) {
+//         throw error;
+//     }
+// };
     
-
+mongoose.connect("mongodb://localhost:27017", { dbName: "QLVEXE" }).catch((e) => {
+    console.log("Error connected database");
+    console.log(e);
+    process.exit(-1);
+});
 mongoose.connection.on("disconnected", ()=>{
     console.log("MongoDB disconnected!");
 })
@@ -88,7 +92,6 @@ app.use((err, req, res, next)=>{
     
 });
 
-app.listen(8800, ()=> {
-    connect();
-    console.log("Connected to Backend!")
-})
+app.listen(8800, async () => {
+    console.log(`App is running on port 8800...`);
+});
