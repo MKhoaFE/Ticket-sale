@@ -1,59 +1,48 @@
 import mongoose from "mongoose";
 // const mongoose = require('mongoose');
 const HotelSchema = new mongoose.Schema({
-  name: {
+  from: {
     type: String,
     required: true,
   },
-  type: {
+  to: {
     type: String,
     required: true,
   },
-  city: {
+  date: {
     type: String,
     required: true,
   },
-  address: {
+  time_go: {
     type: String,
     required: true,
   },
-  distance: {
+  time_arrival: {
     type: String,
     required: true,
   },
-  photos: {
-    type: [String],
-  },
-  title: {
+  sum_time: {
     type: String,
     required: true,
   },
-  desc: {
+  car_type: {
     type: String,
     required: true,
   },
-  rating: {
-    type: Number,
-    min: 0,
-    max: 5,
+  sum_distance: {
+    type: String,
+    required: true,
   },
-  rooms: [
+
+  tickets: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Room",
+      ref: "Ticket",
     },
   ],
-  cheapestPrice: {
-    type: Number,
-    required: true,
-  },
-  featured: {
-    type: Boolean,
-    default: false,
-  },
 });
 
-export default mongoose.model("Hotel", HotelSchema);
+export default mongoose.model("Ride", HotelSchema);
 
 // const Hotel = mongoose.model("student", HotelSchema);
 

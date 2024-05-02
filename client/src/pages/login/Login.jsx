@@ -9,7 +9,7 @@ import "./login.css";
 
 const Login = () => {
     const [credentials, setCredentials] = useState({
-        username: undefined,
+        email: undefined,
         password: undefined,
     });    
 
@@ -30,13 +30,14 @@ const Login = () => {
             console.log(res.data, "type", typeof res.data);
             dispatch({type:"LOGIN_SUCCESS", payload: res.data.details })
             navigate("/");
+            console.log("logged in");
         }
         catch(err){
             dispatch({type:"LOGIN_FAILURE", payload:err.response.details});
         }
     } 
 
-    console.log("logged in");
+
 
     return (
         <div className="login">
@@ -46,8 +47,8 @@ const Login = () => {
           <h1 style={{marginBottom: '15px'}}>LOGIN</h1>
             <input
               type="text"
-              placeholder="username"
-              id="username"
+              placeholder="email"
+              id="email"
               onChange={handleChange}
               className="lInput"
               style={{marginBottom: '20px'}}

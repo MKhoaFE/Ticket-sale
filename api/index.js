@@ -1,12 +1,3 @@
-// const express = require("express");
-// const dotenv = require("dotenv");
-// const mongoose = require("mongoose");
-// const app = express();
-// const authRoute = require("./routes/auth");
-// const authUsers = require("./routes/users");
-// const hotelsRoute = require("./routes/hotels");
-// const authRooms = require("./routes/rooms");
-
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
