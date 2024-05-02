@@ -5,23 +5,34 @@ import authRoute from "./routes/auth.js";
 import usersRoute from "./routes/users.js";
 import hotelsRoute from "./routes/hotels.js";
 import roomsRoute from "./routes/rooms.js";
+import statisticRoute from "./routes/statisticRouter.js";
 import bookingsRoute from "./routes/bookings.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-
+import config from "./config/config.js";
 const app = express();
 
-const connect = async () => {
+// const connect = async () => {
 
+//     try {
+//         // await mongoose.connect(process.env.MONGO);
+//         await mongoose.connect("mongodb://localhost:27017");
+//     } catch (error) {
+//         throw error;
+//     }
+// };
+    
+const connect = async () => {
     try {
         // await mongoose.connect(process.env.MONGO);
-        await mongoose.connect("mongodb+srv://nhmkhoajob:Minhkhoa0404.@cluster0.1vup4p8.mongodb.net/");
+        await mongoose.connect(
+            "mongodb+srv://nhmkhoajob:Minhkhoa0404.@cluster0.1vup4p8.mongodb.net/",
+            { dbName: "FutaBus" }
+        );
     } catch (error) {
         throw error;
     }
 };
-    
-
 mongoose.connection.on("disconnected", ()=>{
     console.log("MongoDB disconnected!");
 })
@@ -56,6 +67,7 @@ app.use("/api/users", usersRoute);
 app.use("/api/hotels", hotelsRoute);
 app.use("/api/rooms", roomsRoute);
 app.use("/api/bookings", bookingsRoute);
+app.use("/api/statistic", statisticRoute);
 
 
 
@@ -77,7 +89,7 @@ app.use((err, req, res, next)=>{
     
 });
 
-app.listen(8800, ()=> {
+app.listen(8800, () => {
     connect();
-    console.log("Connected to Backend!")
-})
+    console.log("Connected to Backend!");
+});
