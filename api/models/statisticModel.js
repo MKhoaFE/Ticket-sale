@@ -1,65 +1,106 @@
-const sql = require("mssql");
+import sql from "mssql";
 
-const database = require("../utils/database");
-const mongoose = require("mongoose");
+import {
+    getConnectionPool,
+    thongKeTheoTinhThanhModel,
+    thongKeTheoLoaiXeModel,
+    VeDatTheoNgayModel,
+} from "../utils/database.js";
+//const mongoose = require("mongoose");
 
-exports.getThongKeTheoTinhThanh = async () => {
-    const sqlString = `select NoiDen, MONTH(THOIGIANDEN) Thang, YEAR(THOIGIANDEN) Nam ,count(MAVE) SoVeDat, sum(GIAVE) TongDoanhThu
+export const getThongKeTheoTinhThanh = async () => {
+    const sqlString = `select NoiDen TinhThanh, MONTH(THOIGIANDEN) Thang, YEAR(THOIGIANDEN) Nam, sum(GIAVE) TongDoanhThu, count(MAVE) SoVeDat
                         FROM VeXe
-                        Group by NoiDen, Thang, Nam`;
-    const pool = await database.getConnectionPool();
+                        Group by NoiDen, MONTH(THOIGIANDEN), YEAR(THOIGIANDEN)`;
+    const pool = await getConnectionPool();
     const request = new sql.Request(pool);
     const result = await request.query(sqlString);
-    return result.recordset[0];
+    return result.recordsets;
 };
-exports.getThongKeTheoLoaiXe = async () => {
-    const sqlString = `select lx.TenLoaiXe, MONTH(THOIGIANDEN) Thang, YEAR(THOIGIANDEN) Nam ,count(MAVE) SoVeDat, sum(GIAVE) TongDoanhThu
-                        FROM VeXe vx
-                        Join Xe x on vx.BienSoXe = x.BienSoXe
+export const getThongKeTheoLoaiXe = async () => {
+    const sqlString = `select lx.TenLoaiXe LoaiXe, MONTH(THOIGIANDEN) Thang, YEAR(THOIGIANDEN) Nam, sum(GIAVE) TongDoanhThu, count(MAVE) SoVeDat
+                        FROM VEXE vx
+                        Join Xe x on vx.BienSoXe = x.BSXe
                         join LoaiXe lx on lx.IDLoaiXe = x.IDLoaiXe
-                        Group by NoiDen, Thang, Nam`;
-    const pool = await database.getConnectionPool();
+                        Group by lx.TENLOAIXE, MONTH(THOIGIANDEN), YEAR(THOIGIANDEN)`;
+    const pool = await getConnectionPool();
     const request = new sql.Request(pool);
     const result = await request.query(sqlString);
-    return result.recordset[0];
+    return result.recordsets;
 };
-exports.getVeDatHomNayTheoTinhThanh = async () => {
+export const getVeDatHomNayTheoTinhThanh = async () => {
     const sqlString = `select NoiDen, count(MAVE) SoVeDat
                         FROM VeXe
                         WHERE NGAYDAT = GETDATE()
                         Group by NoiDen`;
-    const pool = await database.getConnectionPool();
+    const pool = await getConnectionPool();
     const request = new sql.Request(pool);
     const result = await request.query(sqlString);
-    return result.recordset[0];
+    return result.recordsets;
 };
-exports.getVeDatTheoNgay = async () => {
-    const sqlString = `select count(MaVe), DAY(NGAYDAT), MONTH(NGAYDAT), YEAR(NGAYDAT),
+export const getVeDatTheoNgay = async () => {
+    const sqlString = `select DAY(NGAYDAT) Ngay, MONTH(NGAYDAT) Thang, YEAR(NGAYDAT) Nam, count(MaVe) SoVeDat
                         FROM VeXe
                         Group by NGAYDAT`;
-    const pool = await database.getConnectionPool();
+    const pool = await getConnectionPool();
     const request = new sql.Request(pool);
     const result = await request.query(sqlString);
-    return result.recordset[0];
+    return result.recordsets;
 };
 
-exports.postThongKeTheoLoaiXeNoSQL = async (req) => {
-    const result = await new database.thongKeTheoLoaiXeModel(req).save();
-    return result;
+export const postThongKeTheoLoaiXeNoSQL = async (req) => {
+    for (let i = 0; i < req[0].length; i++){
+        await new thongKeTheoLoaiXeModel(req[0][i]).save();
+    } 
+    //return result;
 };
-exports.postThongKeTheoTinhThanhNoSQL = async (req) => {
-    const result = await new database.thongKeTheoTinhThanhModel(
-        req
-    ).save();
-    return result;
+export const postThongKeTheoTinhThanhNoSQL = async (req) => {
+    for (let i = 0; i < req[0].length; i++) {
+        
+        await new thongKeTheoTinhThanhModel(req[0][i]).save();
+    } 
+    // const result = 
+    // return result;
 };
-exports.postVeDatTheoNgayNoSQL = async (req) => {
-    const result = await new database.VeDatTheoNgayModel(req).save();
-    return result;
+export const postVeDatTheoNgayNoSQL = async (req) => {
+    for (let i = 0; i < req[0].length; i++) {
+        await new VeDatTheoNgayModel(req[0][i]).save();
+    } 
+    // const result = 
+    // return result;
 };
 
-exports.getStatistic = async () => {
-    const pool = await database.getConnectionPool();
+export const getThongKeTheoLoaiXeNoSQL = async (req) => {
+    try {
+        const result = await thongKeTheoLoaiXeModel.find();
+        return result;
+    } catch (err) {
+        return err;
+    }
+};
+export const getThongKeTheoTinhThanhNoSQL = async (req) => {
+    try {
+        const result = await thongKeTheoTinhThanhModel.find();
+        return result;
+    } catch (err) {
+        return err;
+    }
+    // const result =
+    // return result;
+};
+export const getVeDatTheoNgayNoSQL = async (req) => {
+    try {
+        const result = await VeDatTheoNgayModel.find();
+        return result;
+    } catch (err) {
+        return err;
+    }
+    // const result =
+    // return result;
+};
+
+export const getStatistic = async () => {
+    const pool = await getConnectionPool();
     const request = new sql.Request(pool);
     const result = await request.execute("sp_GetStatistic");
     return result.recordsets;

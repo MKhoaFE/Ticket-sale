@@ -2,15 +2,15 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const config = {
-    NODE_ENV: process.env.NODE_ENV,
+    NODE_ENV: "development",
 
-    PORT: process.env.PORT || 3001,
+    PORT: 3001,
 
     DATABASE: {
-        server: process.env.DB_SERVER,
-        user: process.env.DB_USER,
-        password: process.env.DB_PWD,
-        database: process.env.DB_NAME,
+        server: "LAPTOP-II48F2VK",
+        user: "admin",
+        password: "admin",
+        database: "QLVEXE",
     },
 
     MONGODB_URL: process.env.MONGODB_URL,

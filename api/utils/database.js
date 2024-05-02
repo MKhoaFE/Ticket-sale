@@ -1,9 +1,9 @@
-const sql = require("mssql");
-const mongoose = require("mongoose");
+import sql from "mssql";
+import mongoose from "mongoose";
 const { Schema } = mongoose;
-const config = require("../config/config");
+import config from "../config/config.js";
 
-exports.getConnectionPool = async () => {
+export const getConnectionPool = async () => {
     let pool = null;
 
     const finalConfig = {
@@ -24,42 +24,87 @@ exports.getConnectionPool = async () => {
 };
 
 const thongKeTheoTinhThanhSchema = new Schema({
-    TinhThanh: String,
-    Thang: Number,
-    Nam: Number,
-    TongDoanhThu: Number,
-    SoVeDat: Number,
+    TinhThanh: {
+        type: String,
+        required: true,
+    },
+    Thang: {
+        type: Number,
+        required: true,
+    },
+    Nam: {
+        type: Number,
+        required: true,
+    },
+
+    TongDoanhThu: {
+        type: Number,
+        required: true,
+    },
+    SoVeDat: {
+        type: Number,
+        required: true,
+    },
 });
 
-const thongKeTheoTinhThanhModel = mongoose.model(
+export const thongKeTheoTinhThanhModel = mongoose.model(
     "thongKeTheoTinhThanh",
     thongKeTheoTinhThanhSchema
 );
 
 const thongKeTheoLoaiXeSchema = new Schema({
-    LoaiXe: String,
-    Thang: Number,
-    Nam: Number,
-    TongDoanhThu: Number,
-    SoVeDat: Number,
+    LoaiXe: {
+        type: String,
+        required: true,
+    },
+
+    Thang: {
+        type: Number,
+        required: true,
+    },
+
+    Nam: {
+        type: Number,
+        required: true,
+    },
+
+    TongDoanhThu: {
+        type: Number,
+        required: true,
+    },
+
+    SoVeDat: {
+        type: Number,
+        required: true,
+    },
 });
 
-const thongKeTheoLoaiXeModel = mongoose.model(
+export const thongKeTheoLoaiXeModel = mongoose.model(
     "thongKeTheoLoaiXe",
     thongKeTheoLoaiXeSchema
 );
 
 const VeDatTheoNgaySchema = new Schema({
-    Ngay: Number,
-    Thang: Number,
-    Nam: Number,
-    SoVeDat: Number,
+    Ngay: {
+        type: Number,
+        required: true,
+    },
+
+    Thang: {
+        type: Number,
+        required: true,
+    },
+    Nam: {
+        type: Number,
+        required: true,
+    },
+    SoVeDat: {
+        type: Number,
+        required: true,
+    },
 });
 
-const VeDatTheoNgayModel = mongoose.model("VeDatTheoNgay", VeDatTheoNgaySchema);
-
-module.exports = {
-    VeDatTheoNgayModel,
-    thongKeTheoTinhThanhModel,
-    thongKeTheoLoaiXeModel,
-};
+export const VeDatTheoNgayModel = mongoose.model(
+    "VeDatTheoNgay",
+    VeDatTheoNgaySchema
+);

@@ -1,8 +1,8 @@
 import express from 'express';
 
-import { getStatistic, updateStatistic }  from '../controllers/statisticController';
+import { getStatistic, updateStatistic }  from '../controllers/statisticController.js';
 //const authController = require('../controllers/authController');
-const config = require('../config/config');
+import config from '../config/config.js';
 
 const router = express.Router();
 
