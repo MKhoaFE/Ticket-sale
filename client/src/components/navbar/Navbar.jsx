@@ -5,6 +5,7 @@ import { AuthContext } from "../../context/AuthContext";
 // import { SearchContext } from "../../context/SearchContext";
 // import { useState } from "react";
 import {useNavigate} from 'react-router-dom';
+import { Button } from "@mui/material";
 
 
 
@@ -40,8 +41,8 @@ const Navbar = () => {
 
         </Link>   {/* if there is user show his username otherwise show this div.  */}
         {user ? <div>
-          <span>{user.username}</span>
-          <button className="navButton" onClick={() => handleLogout()} >Logout</button>
+          <span style={{color: "black"}}>Hello {user.email}</span>
+          <Button variant="contained" style={{background:"white", color:"black", marginLeft:"1rem"}} className="navButton" onClick={() => handleLogout()} >Logout</Button>
         </div> : (
           <div className="navItems">
             <button className="navButton" onClick={() => handleMoveToRegister()}>Register</button>

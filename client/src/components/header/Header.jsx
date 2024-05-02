@@ -19,13 +19,55 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import "bootstrap/dist/css/bootstrap.min.css";
 import MultipleStopIcon from "@mui/icons-material/MultipleStop";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 const Header = ({ type }) => {
   const [age, setAge] = React.useState("");
 
   const handleChange = (event) => {
     setAge(event.target.value);
+  };
+
+  //Lấy thông tin tỉnh thành
+  const [cities, setCities] = useState([]);
+  const [selectedCity, setSelectedCity] = useState("");
+  const [selectedDestination, setSelectedDestination] = useState("");
+  const [districts, setDistricts] = useState([]);
+  const [wards, setWards] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios(
+        "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json"
+      );
+      setCities(result.data);
+    };
+    fetchData();
+  }, []);
+
+  const handleCityChange = (event) => {
+    const selectedCityId = event.target.value;
+    const selectedCity = cities.find((city) => city.Id === selectedCityId);
+    setSelectedCity(selectedCityId);
+    setDistricts(selectedCity.Districts);
+    setWards([]);
+  };
+
+  const handleDistrictChange = (event) => {
+    const selectedDistrictId = event.target.value;
+    const selectedDistrict = districts.find(
+      (district) => district.Id === selectedDistrictId
+    );
+    setWards(selectedDistrict.Wards);
+  };
+
+  const handleDestinationChange = (event) => {
+    const selectedDestinationId = event.target.value;
+    const selectedDestination = cities.find(
+      (city) => city.Id === selectedDestinationId
+    );
+    setSelectedDestination(selectedDestinationId);
   };
   return (
     <div className="header container">
@@ -57,20 +99,20 @@ const Header = ({ type }) => {
                 <div className="formInput1">
                   <Box sx={{ minWidth: "10rem" }}>
                     <FormControl>
-                      <InputLabel id="demo-simple-select-label">
-                        Điểm đi
-                      </InputLabel>
+                      <InputLabel id="city-label">Điểm đi</InputLabel>
                       <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={age}
-                        label="Age"
-                        onChange={handleChange}
+                        labelId="city-label"
+                        id="city"
+                        value={selectedCity}
+                        onChange={handleCityChange}
                         style={{ width: "12rem" }}
                       >
-                        <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
+                        <MenuItem value="">Chọn điểm đi</MenuItem>
+                        {cities.map((city) => (
+                          <MenuItem key={city.Id} value={city.Id}>
+                            {city.Name}
+                          </MenuItem>
+                        ))}
                       </Select>
                     </FormControl>
                   </Box>
@@ -85,20 +127,25 @@ const Header = ({ type }) => {
                   </div>
                   <Box sx={{ minWidth: "10rem" }}>
                     <FormControl>
-                      <InputLabel id="demo-simple-select-label">
-                        Điểm đến
-                      </InputLabel>
+                      <InputLabel id="destination-label">Điểm đến</InputLabel>
                       <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={age}
-                        label="Age"
-                        onChange={handleChange}
+                        labelId="destination-label"
+                        id="destination"
+                        value={selectedDestination}
+                        onChange={handleDestinationChange}
                         style={{ width: "12rem" }}
                       >
-                        <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
+                        <MenuItem value="">Chọn điểm đến</MenuItem>
+                        {cities.map((city) => {
+                          if (city.Id !== selectedCity) {
+                            return (
+                              <MenuItem key={city.Id} value={city.Id}>
+                                {city.Name}
+                              </MenuItem>
+                            );
+                          }
+                          return null;
+                        })}
                       </Select>
                     </FormControl>
                   </Box>

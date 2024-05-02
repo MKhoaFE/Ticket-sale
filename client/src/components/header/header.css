@@ -112,7 +112,9 @@ svg{
   gap: 1rem;
   width: 50%;
 }
-
+.bottom{
+  position: relative;
+}
 .wrap{
   display: flex;
   justify-content: center;
