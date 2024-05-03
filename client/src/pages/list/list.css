@@ -13,7 +13,7 @@
 
 .listSearch {
   flex: 1;
-  background-color: #febb02;
+  background-color: #FFCCC0;
   padding: 10px;
   border-radius: 10px;
   position: sticky;
@@ -81,3 +81,29 @@
 .listResult {
   flex: 3;
 }
+
+.ticketItem{
+  padding: 5px;
+  border: 1px solid grey;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.card-content{
+  padding: 5px;
+  line-height: 2rem;
+}
+.left{
+  width: 70%;
+}
+
+.right{
+  display: flex;
+  height: 100%;
+  width: 100%;
+justify-content: end;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;width: 100;
+}
+

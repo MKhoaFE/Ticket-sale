@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 // const mongoose = require('mongoose');
-const HotelSchema = new mongoose.Schema({
+const RideSchema = new mongoose.Schema({
   from: {
     type: String,
     required: true,
@@ -21,16 +21,17 @@ const HotelSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  sum_time: {
-    type: String,
-    required: true,
-  },
   car_type: {
     type: String,
     required: true,
   },
   sum_distance: {
     type: String,
+    required: true,
+  },
+
+  slot: {
+    type: Number,
     required: true,
   },
 
@@ -42,11 +43,5 @@ const HotelSchema = new mongoose.Schema({
   ],
 });
 
-export default mongoose.model("Ride", HotelSchema);
+export default mongoose.model("Ride", RideSchema);
 
-// const Hotel = mongoose.model("student", HotelSchema);
-
-
-// module.exports = Hotel;
-
-// module.exports = mongoose.model("Hotel", HotelSchema);

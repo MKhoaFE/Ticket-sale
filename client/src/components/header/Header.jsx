@@ -21,6 +21,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import MultipleStopIcon from "@mui/icons-material/MultipleStop";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Header = ({ type }) => {
   const [age, setAge] = React.useState("");
@@ -35,6 +36,9 @@ const Header = ({ type }) => {
   const [selectedDestination, setSelectedDestination] = useState("");
   const [districts, setDistricts] = useState([]);
   const [wards, setWards] = useState([]);
+  const [date, setDate] = useState(null);
+  const [ticketNumber, setTicketNumber] = useState("");
+  const [isSearchEnabled, setIsSearchEnabled] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,6 +49,23 @@ const Header = ({ type }) => {
     };
     fetchData();
   }, []);
+
+  useEffect(() => {
+    setIsSearchEnabled(
+      selectedCity !== "" &&
+        selectedDestination !== "" &&
+        date !== null &&
+        ticketNumber !== ""
+    );
+  }, [selectedCity, selectedDestination, date, ticketNumber]);
+
+  const handleDateChange = (newDate) => {
+    setDate(newDate);
+  };
+  const handleTicketNumberChange = (event) => {
+    const value = event.target.value;
+    setTicketNumber(value);
+  };
 
   const handleCityChange = (event) => {
     const selectedCityId = event.target.value;
@@ -156,7 +177,13 @@ const Header = ({ type }) => {
                       dateAdapter={AdapterDayjs}
                       style={{ width: "12rem" }}
                     >
-                      <DatePicker />
+                      <DatePicker
+                        value={date}
+                        onChange={handleDateChange}
+                        renderInput={(params) => (
+                          <TextField {...params} label="Ngày" />
+                        )}
+                      />
                     </LocalizationProvider>
                   </Box>
                   <Box sx={{ minWidth: "10rem" }}>
@@ -166,22 +193,29 @@ const Header = ({ type }) => {
                       multiline
                       maxRows={4}
                       style={{ width: "12rem" }}
+                      value={ticketNumber}
+                      onChange={handleTicketNumberChange}
                     />
                   </Box>
                 </div>
               </div>
               <div className="bottom">
                 <div className="wrap">
-                  <Button
-                    variant="outlined"
-                    style={{
-                      backgroundColor: "#FFCCC0",
-                      color: "white",
-                      padding: "10px 80px",
-                    }}
-                  >
-                    Search
-                  </Button>
+                  <Link to="/hotels">
+                    <Button
+                      variant="outlined"
+                      style={{
+                        backgroundColor: isSearchEnabled
+                          ? "#FFA500"
+                          : "#FFCCC0",
+                        color: "white",
+                        padding: "10px 80px",
+                      }}
+                      disabled={!isSearchEnabled}
+                    >
+                      Search
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>
