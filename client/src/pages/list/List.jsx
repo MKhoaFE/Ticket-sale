@@ -5,13 +5,40 @@ import Footer from "../../components/footer/Footer";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { TextField } from "@mui/material";
-import { useState } from "react";
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  TextField,
+  Typography,
+} from "@mui/material";
+import { useEffect, useState } from "react";
+import ticketLogo from "../../assets/images/ticket.jpg";
 
 const List = () => {
   const [date, setDate] = useState(null);
   const handleDateChange = (newDate) => {
     setDate(newDate);
+  };
+
+  const [rides, setRides] = useState([]);
+
+  useEffect(() => {
+    fetchRides();
+  }, []);
+
+  const fetchRides = async () => {
+    try {
+      const response = await fetch("http://localhost:8800/api/rides");
+      if (!response.ok) {
+        throw new Error("Failed to fetch rides");
+      }
+      const data = await response.json();
+      setRides(data);
+    } catch (error) {
+      console.error("Error fetching rides:", error);
+    }
   };
   return (
     <div>
@@ -29,11 +56,11 @@ const List = () => {
               <label>Ngày đi</label>
               <LocalizationProvider
                 dateAdapter={AdapterDayjs}
-                style={{ width: "12rem", }}
+                style={{ width: "12rem" }}
               >
                 <DatePicker
                   value={date}
-                  onChange={handleDateChange}                
+                  onChange={handleDateChange}
                   renderInput={(params) => (
                     <TextField {...params} label="Ngày" />
                   )}
@@ -72,14 +99,102 @@ const List = () => {
             <button>Search</button>
           </div>
           <div className="listResult">
-            {/* {loading ? "loading": <>
-            
-              {data.map(item=>(
+            <div className="listResult">
+              {/* <ul>
+                {rides.map((ride) => (
+                  <li key={ride._id}>
+                    <p>From: {ride.from}</p>
+                    <p>To: {ride.to}</p>
+                    <p>Date: {ride.date}</p>
+                    <p>Time Go: {ride.time_go}</p>
+                    <p>Time Arrival: {ride.time_arrival}</p>
+                    <p>Car Type: {ride.car_type}</p>
+                    <p>Sum Distance: {ride.sum_distance}</p>
+                  </li>
+                ))}
+              </ul> */}
+              {rides.map((ride) => (
+                <div key={ride._id}>
+                  <CardActionArea>
+                    <div className="ticketItem" style={{ display: "flex" }}>
+                      <img src={ticketLogo}></img>
+                      <div className="wrapper">
+                      <div className="card-title">
+                            From:
+                            <span
+                              style={{ fontWeight: "bold", fontSize: "1.5rem" }}
+                            >
+                              {ride.from}
+                            </span>
+                            To:
+                            <span
+                              style={{ fontWeight: "bold", fontSize: "1.5rem" }}
+                            >
+                              {ride.to}
+                            </span>
+                          </div>
+                          <div className="card-content" style={{display:"flex"}}>
+                        <div className="left" style={{display:"block"}}>
 
-            <SearchItem item={item} key={item._id}/>
+                          <div className="date">
+                            Date:{" "}
+                            <span
+                              style={{ fontWeight: "bold", fontSize: "1rem" }}
+                            >
+                              {" "}
+                              {ride.date}
+                            </span>
+                          </div>
+                          <div className="time-go">
+                            Time Start:{" "}
+                            <span
+                              style={{ fontWeight: "bold", fontSize: "1rem" }}
+                            >
+                              {" "}
+                              {ride.time_go}
+                            </span>
+                          </div>
+                          <div className="time-arrival">
+                            Time Arrival:{" "}
+                            <span
+                              style={{ fontWeight: "bold", fontSize: "1rem" }}
+                            >
+                              {" "}
+                              {ride.time_arrival}
+                            </span>
+                          </div>
+                          <div className="car-type">
+                            Type:{" "}
+                            <span
+                              style={{ fontWeight: "bold", fontSize: "1rem" }}
+                            >
+                              {" "}
+                              {ride.car_type}
+                            </span>
+                          </div>
+                          <div className="distance">
+                            Distance:{" "}
+                            <span
+                              style={{ fontWeight: "bold", fontSize: "1rem" }}
+                            >
+                              {" "}
+                              {ride.distance} km
+                              
+                            </span>
+                          </div>
+                        </div>
+                        <div className="right">
+                          <p style={{fontWeight:"bold", fontSize:"1.1rem", color:"#F93A27"}}>Giá vé: {ride.price}</p>
+                          <p style={{fontWeight:"bold", fontSize:"1.1rem"}}>Còn trống:{ride.slot}</p>
+                        </div>
+                      </div>
+                      </div>
+
+                    </div>
+                  </CardActionArea>
+                </div>
               ))}
-           
-            </>} */}
+            </div>
           </div>
         </div>
       </div>
