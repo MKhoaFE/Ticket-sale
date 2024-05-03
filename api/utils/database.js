@@ -28,12 +28,8 @@ const thongKeTheoTinhThanhSchema = new Schema({
         type: String,
         required: true,
     },
-    Thang: {
-        type: Number,
-        required: true,
-    },
-    Nam: {
-        type: Number,
+    ThangNam: {
+        type: String,
         required: true,
     },
 
@@ -58,16 +54,10 @@ const thongKeTheoLoaiXeSchema = new Schema({
         required: true,
     },
 
-    Thang: {
-        type: Number,
+    ThangNam: {
+        type: String,
         required: true,
     },
-
-    Nam: {
-        type: Number,
-        required: true,
-    },
-
     TongDoanhThu: {
         type: Number,
         required: true,
@@ -86,16 +76,7 @@ export const thongKeTheoLoaiXeModel = mongoose.model(
 
 const VeDatTheoNgaySchema = new Schema({
     Ngay: {
-        type: Number,
-        required: true,
-    },
-
-    Thang: {
-        type: Number,
-        required: true,
-    },
-    Nam: {
-        type: Number,
+        type: Date,
         required: true,
     },
     SoVeDat: {

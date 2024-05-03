@@ -8,6 +8,11 @@ import rideRoute from "./routes/Ride.route.js";
 import statisticRoute from "./routes/statisticRouter.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import { update } from "./controllers/statisticController.js";
+import schedule from "node-schedule";
+import config from "./config/config.js";
+const app = express();
+
 
 
 
@@ -23,17 +28,14 @@ const connect = async () => {
         throw error;
     }
 };
-mongoose.connection.on("disconnected", ()=>{
+mongoose.connection.on("disconnected", () => {
     console.log("MongoDB disconnected!");
-})
-
-mongoose.connection.on("connected", ()=>{
-    console.log("MongoDB connected!");
-})
-
-app.get("/", (req, res)=>{
-    res.send("Hello first request!")
 });
+
+mongoose.connection.on("connected", () => {
+    console.log("MongoDB connected!");
+});
+
 
 
 
@@ -50,13 +52,11 @@ app.use("/api/users", usersRoute);
 app.use("/api/statistic", statisticRoute);
 app.use('/api/rides', rideRoute);
 
-
-
-//Error Handler Middleware 
-app.use((err, req, res, next)=>{
-
-    const errorStatus = err.status || 500
-    const errorMessage = err.errorMessage || "Something went wrong!"
+const job = schedule.scheduleJob("1 * *", update);
+//Error Handler Middleware
+app.use((err, req, res, next) => {
+    const errorStatus = err.status || 500;
+    const errorMessage = err.errorMessage || "Something went wrong!";
 
 
     return res.status(errorStatus).json({
@@ -66,8 +66,6 @@ app.use((err, req, res, next)=>{
         stack: err.stack,                           
     });
         
-
-    
 });
 
 
