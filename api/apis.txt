@@ -17,8 +17,8 @@
 // JWT TOKEN 
 
 {
-    "username":"Mohit Saini",
-    "password":"mohit123"
+    "email":"nhmkhoajob@gmail.com",
+    "password":"123123123"
     "_id": "62ade94b96bf07d607f15153",
 }
 
