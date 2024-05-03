@@ -1,23 +1,25 @@
 import mongoose from "mongoose";
 const RoomSchema = new mongoose.Schema(
   {
-    title: {
-      type: String,
-      required: true,
-    },
     price: {
       type: Number,
       required: true,
     },
-    maxPeople: {
+    seat_number: {
       type: Number,
       required: true,
     },
-    desc: {
+    car_type: {
       type: String,
       required: true,
     },
-    roomNumbers: [{ number: Number, unavailableDates: {type: [Date]}}],
+    phone: {
+      type: Number,
+      required: true,
+    },
+    email:{
+      type: String,
+    },
   },
   { timestamps: true }
 );

@@ -1,52 +1,45 @@
 import "./list.css";
 import Navbar from "../../components/navbar/Navbar";
 import Header from "../../components/header/Header";
-import { useLocation } from "react-router-dom";
-import { useState } from "react";
-import { format } from "date-fns";
-import { DateRange } from "react-date-range";
-import SearchItem from "../../components/searchItem/SearchItem";
-import useFetch from "../../hooks/useFetch";
-import { useContext } from "react";
-import { SearchContext } from "../../context/SearchContext";
-import { useNavigate } from "react-router-dom";
+import Footer from "../../components/footer/Footer";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  TextField,
+  Typography,
+} from "@mui/material";
+import { useEffect, useState } from "react";
+import ticketLogo from "../../assets/images/ticket.jpg";
 
 const List = () => {
-  const location = useLocation();
-  const [destination, setDestination] = useState(location.state.destination);
-  const [dates, setDates] = useState(location.state.dates);
-  const [openDate, setOpenDate] = useState(false);
-  const [options, setOptions] = useState(location.state.options);
-  const [min, setMin] = useState(undefined);
-  const [max, setMax] = useState(undefined);
-  const [searched, setSearched] = useState(false);
-  
-  let url = "/hotels";
-  if (destination) {
-    url += `?city=${destination}`;
-  }
-  if (min !== undefined && max !== undefined) {
-    url += `&min=${min}&max=${max}`;
-  }
-
-  if (searched && !destination) {
-    url = "/hotels";
-  }
-
-  const { data, loading, error, reFetch } = useFetch(url);
-  
-  const handleClick = () => {
-    setSearched(true);
-    reFetch();
+  const [date, setDate] = useState(null);
+  const handleDateChange = (newDate) => {
+    setDate(newDate);
   };
 
-  const navigate = useNavigate();
-  const {dispatch} = useContext(SearchContext);
-  const handleSearch = () => {
-    dispatch({type:"NEW_SEARCH", payload: {destination, dates, options} });
-    navigate("/hotels", { state: { destination, dates, options } });
-  };
+  const [rides, setRides] = useState([]);
 
+  useEffect(() => {
+    fetchRides();
+  }, []);
+
+  const fetchRides = async () => {
+    try {
+      const response = await fetch("http://localhost:8800/api/rides");
+      if (!response.ok) {
+        throw new Error("Failed to fetch rides");
+      }
+      const data = await response.json();
+      setRides(data);
+    } catch (error) {
+      console.error("Error fetching rides:", error);
+    }
+  };
   return (
     <div>
       <Navbar />
@@ -57,21 +50,22 @@ const List = () => {
             <h1 className="lsTitle">Search</h1>
             <div className="lsItem">
               <label>Destination</label>
-              <input placeholder={destination} type="text" />
+              <input type="text" />
             </div>
             <div className="lsItem">
-              <label>Check-in Date</label>
-              <span onClick={() => setOpenDate(!openDate)}>{`${format(
-                dates[0].startDate,
-                "MM/dd/yyyy"
-              )} to ${format(dates[0].endDate, "MM/dd/yyyy")}`}</span>
-              {openDate && (
-                <DateRange
-                  onChange={(item) => setDates([item.selection])}
-                  minDate={new Date()}
-                  ranges={dates}
+              <label>Ngày đi</label>
+              <LocalizationProvider
+                dateAdapter={AdapterDayjs}
+                style={{ width: "12rem" }}
+              >
+                <DatePicker
+                  value={date}
+                  onChange={handleDateChange}
+                  renderInput={(params) => (
+                    <TextField {...params} label="Ngày" />
+                  )}
                 />
-              )}
+              </LocalizationProvider>
             </div>
             <div className="lsItem">
               <label>Options</label>
@@ -80,56 +74,132 @@ const List = () => {
                   <span className="lsOptionText">
                     Min price <small>per night</small>
                   </span>
-                  <input type="number" onChange={e=>setMin(e.target.value)} className="lsOptionInput" />
+                  <input type="number" className="lsOptionInput" />
                 </div>
                 <div className="lsOptionItem">
                   <span className="lsOptionText">
                     Max price <small>per night</small>
                   </span>
-                  <input type="number" onChange={e=>setMax(e.target.value)}  className="lsOptionInput" />
+                  <input type="number" className="lsOptionInput" />
                 </div>
                 <div className="lsOptionItem">
                   <span className="lsOptionText">Adult</span>
-                  <input
-                    type="number"
-                    min={1}
-                    className="lsOptionInput"
-                    placeholder={options.adult}
-                  />
+                  <input type="number" min={1} className="lsOptionInput" />
                 </div>
                 <div className="lsOptionItem">
                   <span className="lsOptionText">Children</span>
-                  <input
-                    type="number"
-                    min={0}
-                    className="lsOptionInput"
-                    placeholder={options.children}
-                  />
+                  <input type="number" min={0} className="lsOptionInput" />
                 </div>
                 <div className="lsOptionItem">
                   <span className="lsOptionText">Room</span>
-                  <input
-                    type="number"
-                    min={1}
-                    className="lsOptionInput"
-                    placeholder={options.room}
-                  />
+                  <input type="number" min={1} className="lsOptionInput" />
                 </div>
               </div>
             </div>
-            <button onClick={handleSearch}>Search</button>
+            <button>Search</button>
           </div>
           <div className="listResult">
-            {loading ? "loading": <>
-            
-              {data.map(item=>(
+            <div className="listResult">
+              {/* <ul>
+                {rides.map((ride) => (
+                  <li key={ride._id}>
+                    <p>From: {ride.from}</p>
+                    <p>To: {ride.to}</p>
+                    <p>Date: {ride.date}</p>
+                    <p>Time Go: {ride.time_go}</p>
+                    <p>Time Arrival: {ride.time_arrival}</p>
+                    <p>Car Type: {ride.car_type}</p>
+                    <p>Sum Distance: {ride.sum_distance}</p>
+                  </li>
+                ))}
+              </ul> */}
+              {rides.map((ride) => (
+                <div key={ride._id}>
+                  <CardActionArea>
+                    <div className="ticketItem" style={{ display: "flex" }}>
+                      <img src={ticketLogo}></img>
+                      <div className="wrapper">
+                      <div className="card-title">
+                            From:
+                            <span
+                              style={{ fontWeight: "bold", fontSize: "1.5rem" }}
+                            >
+                              {ride.from}
+                            </span>
+                            To:
+                            <span
+                              style={{ fontWeight: "bold", fontSize: "1.5rem" }}
+                            >
+                              {ride.to}
+                            </span>
+                          </div>
+                          <div className="card-content" style={{display:"flex"}}>
+                        <div className="left" style={{display:"block"}}>
 
-            <SearchItem item={item} key={item._id}/>
+                          <div className="date">
+                            Date:{" "}
+                            <span
+                              style={{ fontWeight: "bold", fontSize: "1rem" }}
+                            >
+                              {" "}
+                              {ride.date}
+                            </span>
+                          </div>
+                          <div className="time-go">
+                            Time Start:{" "}
+                            <span
+                              style={{ fontWeight: "bold", fontSize: "1rem" }}
+                            >
+                              {" "}
+                              {ride.time_go}
+                            </span>
+                          </div>
+                          <div className="time-arrival">
+                            Time Arrival:{" "}
+                            <span
+                              style={{ fontWeight: "bold", fontSize: "1rem" }}
+                            >
+                              {" "}
+                              {ride.time_arrival}
+                            </span>
+                          </div>
+                          <div className="car-type">
+                            Type:{" "}
+                            <span
+                              style={{ fontWeight: "bold", fontSize: "1rem" }}
+                            >
+                              {" "}
+                              {ride.car_type}
+                            </span>
+                          </div>
+                          <div className="distance">
+                            Distance:{" "}
+                            <span
+                              style={{ fontWeight: "bold", fontSize: "1rem" }}
+                            >
+                              {" "}
+                              {ride.distance} km
+                              
+                            </span>
+                          </div>
+                        </div>
+                        <div className="right">
+                          <p style={{fontWeight:"bold", fontSize:"1.1rem", color:"#F93A27"}}>Giá vé: {ride.price}</p>
+                          <p style={{fontWeight:"bold", fontSize:"1.1rem"}}>Còn trống:{ride.slot}</p>
+                        </div>
+                      </div>
+                      </div>
+
+                    </div>
+                  </CardActionArea>
+                </div>
               ))}
-           
-            </>}
+            </div>
           </div>
         </div>
+      </div>
+      <div className="homeContainer2">
+        <Footer />
       </div>
     </div>
   );

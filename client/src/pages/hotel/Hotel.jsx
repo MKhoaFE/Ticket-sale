@@ -86,10 +86,6 @@ const Hotel = () => {
     
     if(user){
       setOpenModal(true);
-      // console.log("asdasdasdasdasd")
-      // console.log(id);
-      // console.log(data.name);
-      // console.log(days * data.cheapestPrice * options.room);
     }else{
       navigate("/login");   // if user is not login
     }

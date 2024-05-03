@@ -89,6 +89,7 @@ const Sidebar = () => {
                       </li>
                   </Link>
                   {/* <p className="title">USEFUL</p>
+
           <li>
             <InsertChartIcon className="icon" />
             <span>Stats</span>

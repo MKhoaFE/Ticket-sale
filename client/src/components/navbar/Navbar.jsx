@@ -6,7 +6,7 @@ import { AuthContext } from "../../context/AuthContext";
 // import { useState } from "react";
 import {useNavigate} from 'react-router-dom';
 import { Button } from "@mui/material";
-
+import PersonIcon from '@mui/icons-material/Person';
 
 
 const Navbar = () => {
@@ -41,7 +41,7 @@ const Navbar = () => {
 
         </Link>   {/* if there is user show his username otherwise show this div.  */}
         {user ? <div>
-          <span style={{color: "black"}}>Hello {user.email}</span>
+          <span style={{color: "black"}}><PersonIcon/> Hello {user.email}</span>
           <Button variant="contained" style={{background:"white", color:"black", marginLeft:"1rem"}} className="navButton" onClick={() => handleLogout()} >Logout</Button>
         </div> : (
           <div className="navItems">
@@ -57,8 +57,3 @@ const Navbar = () => {
 }
 
 export default Navbar
-
-// {user ? (<span>{user.username}</span> ): (<div className="navItems">    
-// <button className="navButton">Register</button>
-// <button className="navButton">Login</button>
-// </div>)}
