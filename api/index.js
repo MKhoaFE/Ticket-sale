@@ -18,6 +18,8 @@ import statisticRoute from "./routes/statisticRouter.js";
 import bookingsRoute from "./routes/bookings.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import { update } from "./controllers/statisticController.js";
+import schedule from "node-schedule";
 import config from "./config/config.js";
 const app = express();
 
@@ -30,7 +32,7 @@ const app = express();
 //         throw error;
 //     }
 // };
-    
+
 const connect = async () => {
     try {
         // await mongoose.connect(process.env.MONGO);
@@ -42,33 +44,26 @@ const connect = async () => {
         throw error;
     }
 };
-mongoose.connection.on("disconnected", ()=>{
+mongoose.connection.on("disconnected", () => {
     console.log("MongoDB disconnected!");
-})
-
-mongoose.connection.on("connected", ()=>{
-    console.log("MongoDB connected!");
-})
-
-app.get("/", (req, res)=>{
-    res.send("Hello first request!")
 });
 
+mongoose.connection.on("connected", () => {
+    console.log("MongoDB connected!");
+});
 
-
-
-
-
-
+app.get("/", (req, res) => {
+    res.send("Hello first request!");
+});
 
 // middlewares               - to prevent too much code in index.js so separate route folder is created.
 // creating middleware
 
-app.use(cors({origin:"http://localhost:3000",method:"GET"}))
+app.use(cors({ origin: "http://localhost:3000", method: "GET" }));
 // app.use(cors)
 
 //to use json - sending by the user in post request
-app.use(express.json())
+app.use(express.json());
 app.use(cookieParser());
 
 app.use("/api/auth", authRoute);
@@ -78,24 +73,21 @@ app.use("/api/rooms", roomsRoute);
 app.use("/api/bookings", bookingsRoute);
 app.use("/api/statistic", statisticRoute);
 
-
-
-//Error Handler Middleware 
-app.use((err, req, res, next)=>{
-
-    const errorStatus = err.status || 500
-    const errorMessage = err.errorMessage || "Something went wrong!"
+const job = schedule.scheduleJob("1 * *", update);
+//Error Handler Middleware
+app.use((err, req, res, next) => {
+    const errorStatus = err.status || 500;
+    const errorMessage = err.errorMessage || "Something went wrong!";
 
     //handling error and responding to the client request. (sending error to client side)
     return res.status(errorStatus).json({
         success: false,
         status: errorStatus,
         messsage: errorMessage,
-        stack: err.stack,                           //it will give more detail about stack
+        stack: err.stack, //it will give more detail about stack
     });
-        
+
     // next(); // next is callback function
-    
 });
 
 app.listen(8800, () => {

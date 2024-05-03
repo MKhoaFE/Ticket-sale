@@ -9,37 +9,36 @@ import {
 //const mongoose = require("mongoose");
 
 export const getThongKeTheoTinhThanh = async () => {
-    const sqlString = `select NoiDen TinhThanh, MONTH(THOIGIANDEN) Thang, YEAR(THOIGIANDEN) Nam, sum(GIAVE) TongDoanhThu, count(MAVE) SoVeDat
+    const sqlString = `select NoiDen TinhThanh, FORMAT(THOIGIANDEN, 'MM-yyyy') AS ThangNam, sum(GIAVE) TongDoanhThu, count(MAVE) SoVeDat
                         FROM VeXe
-                        Group by NoiDen, MONTH(THOIGIANDEN), YEAR(THOIGIANDEN)`;
+                        Group by NoiDen, FORMAT(THOIGIANDEN, 'MM-yyyy')`;
     const pool = await getConnectionPool();
     const request = new sql.Request(pool);
     const result = await request.query(sqlString);
     return result.recordsets;
 };
 export const getThongKeTheoLoaiXe = async () => {
-    const sqlString = `select lx.TenLoaiXe LoaiXe, MONTH(THOIGIANDEN) Thang, YEAR(THOIGIANDEN) Nam, sum(GIAVE) TongDoanhThu, count(MAVE) SoVeDat
+    const sqlString = `select lx.TenLoaiXe LoaiXe, FORMAT(THOIGIANDEN, 'MM-yyyy') AS ThangNam, sum(GIAVE) TongDoanhThu, count(MAVE) SoVeDat
                         FROM VEXE vx
                         Join Xe x on vx.BienSoXe = x.BSXe
                         join LoaiXe lx on lx.IDLoaiXe = x.IDLoaiXe
-                        Group by lx.TENLOAIXE, MONTH(THOIGIANDEN), YEAR(THOIGIANDEN)`;
+                        Group by lx.TENLOAIXE, FORMAT(THOIGIANDEN, 'MM-yyyy')`;
     const pool = await getConnectionPool();
     const request = new sql.Request(pool);
     const result = await request.query(sqlString);
     return result.recordsets;
 };
-export const getVeDatHomNayTheoTinhThanh = async () => {
-    const sqlString = `select NoiDen, count(MAVE) SoVeDat
+export const getVeDatHomNay = async () => {
+    const sqlString = `select count(MAVE) SoVeDat
                         FROM VeXe
-                        WHERE NGAYDAT = GETDATE()
-                        Group by NoiDen`;
+                        WHERE NGAYDAT = GETDATE()`;
     const pool = await getConnectionPool();
     const request = new sql.Request(pool);
     const result = await request.query(sqlString);
-    return result.recordsets;
+    return result.recordset[0];
 };
 export const getVeDatTheoNgay = async () => {
-    const sqlString = `select DAY(NGAYDAT) Ngay, MONTH(NGAYDAT) Thang, YEAR(NGAYDAT) Nam, count(MaVe) SoVeDat
+    const sqlString = `select NgayDat Ngay, count(MaVe) SoVeDat
                         FROM VeXe
                         Group by NGAYDAT`;
     const pool = await getConnectionPool();
@@ -70,33 +69,51 @@ export const postVeDatTheoNgayNoSQL = async (req) => {
     // return result;
 };
 
-export const getThongKeTheoLoaiXeNoSQL = async (req) => {
+export const getThongKeDoanhThuTheoLoaiXeNoSQL = async (req) => {
     try {
-        const result = await thongKeTheoLoaiXeModel.find();
+        const result = await thongKeTheoLoaiXeModel.find().select('LoaiXe ThangNam TongDoanhThu -_id');
         return result;
     } catch (err) {
         return err;
     }
 };
-export const getThongKeTheoTinhThanhNoSQL = async (req) => {
+export const getThongKeSoLuongTheoLoaiXeNoSQL = async (req) => {
     try {
-        const result = await thongKeTheoTinhThanhModel.find();
+        const result = await thongKeTheoLoaiXeModel
+            .find()
+            .select("LoaiXe ThangNam SoVeDat -_id");
         return result;
     } catch (err) {
         return err;
     }
-    // const result =
-    // return result;
+};
+export const getThongKeDoanhThuTheoTinhThanhNoSQL = async (req) => {
+    try {
+        const result = await thongKeTheoTinhThanhModel
+            .find()
+            .select("TinhThanh ThangNam TongDoanhThu -_id");
+        return result;
+    } catch (err) {
+        return err;
+    }
+};
+export const getThongKeSoLuongTheoTinhThanhNoSQL = async (req) => {
+    try {
+        const result = await thongKeTheoTinhThanhModel
+            .find()
+            .select("TinhThanh ThangNam SoVeDat -_id");
+        return result;
+    } catch (err) {
+        return err;
+    }
 };
 export const getVeDatTheoNgayNoSQL = async (req) => {
     try {
-        const result = await VeDatTheoNgayModel.find();
+        const result = await VeDatTheoNgayModel.find().select('Ngay SoVeDat -_id');
         return result;
     } catch (err) {
         return err;
     }
-    // const result =
-    // return result;
 };
 
 export const getStatistic = async () => {
