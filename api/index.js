@@ -11,10 +11,6 @@ import cors from "cors";
 import { update } from "./controllers/statisticController.js";
 import schedule from "node-schedule";
 import config from "./config/config.js";
-const app = express();
-
-
-
 
 const app = express();
     
