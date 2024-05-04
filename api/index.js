@@ -8,7 +8,7 @@ import rideRoute from "./routes/Ride.route.js";
 import statisticRoute from "./routes/statisticRouter.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import { update } from "./controllers/statisticController.js";
+import { updateDaily, updateMonthly } from "./controllers/statisticController.js";
 import schedule from "node-schedule";
 import config from "./config/config.js";
 
@@ -48,7 +48,8 @@ app.use("/api/users", usersRoute);
 app.use("/api/statistic", statisticRoute);
 app.use('/api/rides', rideRoute);
 
-const job = schedule.scheduleJob("1 * *", update);
+const job1 = schedule.scheduleJob("1 * *", updateMonthly);
+const job2 = schedule.scheduleJob("0 * * *", updateDaily);
 //Error Handler Middleware
 app.use((err, req, res, next) => {
     const errorStatus = err.status || 500;
