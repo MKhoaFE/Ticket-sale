@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { mongo } from "mongoose";
 // const mongoose = require('mongoose');
 const RideSchema = new mongoose.Schema({
   from: {
@@ -29,19 +29,29 @@ const RideSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-
   slot: {
     type: Number,
     required: true,
   },
-
   tickets: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Ticket",
     },
   ],
+  seat: [
+    {
+      id: {
+        type: mongoose.Schema.Types.ObjectId,
+      },
+      empty: {
+        type: Boolean,
+      },
+      number: {
+        type: Number,
+      },
+    },
+  ],
 });
 
 export default mongoose.model("Ride", RideSchema);
-

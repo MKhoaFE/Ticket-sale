@@ -64,10 +64,10 @@ const Sidebar = () => {
                           <span>Users</span>
                       </li>
                   </Link>
-                  <Link to="/lines" style={{ textDecoration: "none" }}>
+                  <Link to="/rides" style={{ textDecoration: "none" }}>
                       <li>
                           <StoreIcon className="icon" />
-                          <span>Lines</span>
+                          <span>Rides (chuyến xe)</span>
                       </li>
                   </Link>
                   <Link to="/Schedule" style={{ textDecoration: "none" }}>

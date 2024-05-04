@@ -1,10 +1,5 @@
 export const userInputs = [
-  {
-    id: "username",
-    label: "Username",
-    type: "text",
-    placeholder: "john_doe",
-  },
+
   {
     id: "email",
     label: "Email",
@@ -23,16 +18,16 @@ export const userInputs = [
     type: "password",
   },
   {
-    id: "country",
-    label: "Country",
+    id: "gender",
+    label: "Gender",
     type: "text",
-    placeholder: "USA",
+    placeholder: "Male/Female",
   },
   {
-    id: "city",
-    label: "City",
+    id: "address",
+    label: "Address",
     type: "text",
-    placeholder: "USA",
+    placeholder: "468 huynh tan phat, quan 7, tphcm",
   },
 ];
 
