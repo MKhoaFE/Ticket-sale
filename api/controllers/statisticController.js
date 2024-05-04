@@ -16,18 +16,22 @@ import {
     getVeDatTheoNgayNoSQL,
 } from "../models/statisticModel.js";
 //const config = require('../config/config');
-export const update = async (req, res, next) => {
+export const updateDaily = async (req, res, next) => {
     const veDatTheoNgay = await getVeDatTheoNgay();
-    const ThongKeTheoTinhThanh = await getThongKeTheoTinhThanh();
-    const ThongKeTheoLoaiXe = await getThongKeTheoLoaiXe();
-    //const veDatHomNayTheoTinhThanh = getVeDatHomNayTheoTinhThanh();
 
-    console.log("entered cron");
-    await postThongKeTheoLoaiXeNoSQL(ThongKeTheoLoaiXe);
-    await postThongKeTheoTinhThanhNoSQL(ThongKeTheoTinhThanh);
     await postVeDatTheoNgayNoSQL(veDatTheoNgay);
     return "Statistic updated successful";
 };
+
+export const updateMonthly = async (req, res, next) => {
+    const ThongKeTheoTinhThanh = await getThongKeTheoTinhThanh();
+    const ThongKeTheoLoaiXe = await getThongKeTheoLoaiXe();
+
+    await postThongKeTheoLoaiXeNoSQL(ThongKeTheoLoaiXe);
+    await postThongKeTheoTinhThanhNoSQL(ThongKeTheoTinhThanh);
+    return "Statistic updated successful";
+};
+
 
 export const updateStatistic = async (req, res) => {
     const veDatTheoNgay = await getVeDatTheoNgay();
