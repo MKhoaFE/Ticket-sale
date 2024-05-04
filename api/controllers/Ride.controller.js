@@ -9,6 +9,27 @@ export const getAllRides = async (req, res) => {
   }
 };
 
+export const updateSeatEmpty = async (req, res) => {
+  console.log(req.body);
+  const query = {
+    "seat.number": parseInt(req.body.seat),
+    _id: req.body.RideId,
+  };
+
+  const updateDoc = {
+    $set: {
+      "seat.$.empty": false,
+    },
+  };
+
+  try {
+    const result = await Ride.updateOne(query, updateDoc);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 export const getRidesById = async (req, res, next) => {
   try {
     const ride = await Ride.findById(req.body.id);

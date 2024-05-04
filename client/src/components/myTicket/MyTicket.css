@@ -1,0 +1,28 @@
+.MyTicket{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding:3% 0;
+}
+.MyTicket_Title{
+  font-size: 2vw;
+}
+.Ticket_Infor{
+  display: flex;
+  justify-content: space-evenly;
+  height: 25vh;
+  width: 50%;
+  margin-top: 5%;
+  border: 1px solid black;
+  padding:2% 2%
+}
+.Ticket_Infor_Ride{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+
+}

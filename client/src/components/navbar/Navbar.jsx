@@ -12,7 +12,6 @@ import PersonIcon from '@mui/icons-material/Person';
 const Navbar = () => {
   const navigate = useNavigate();
   const {user, dispatch} = useContext(AuthContext);
-  console.log("Navbar",user);
 
   const handleMoveToLogin = () =>  {
     navigate('/login')
@@ -21,8 +20,13 @@ const Navbar = () => {
   const handleMoveToRegister = () =>  {
     navigate('/register')
   }
+  const handleMoveToBoooking = () =>  {
+    navigate('/booking')
+  }
+  const handleMoveToUserTicket = () =>  {
+    navigate('/myticket')
+  }
 
-  console.log(user)
   const handleLogout = () =>  {
     dispatch({type:"LOGOUT"});
     navigate('/')
@@ -32,25 +36,30 @@ const Navbar = () => {
 
   return (
     <div className="navbar">
-      <div className="container">
-      <div className="navContainer ">
-        <Link to="/" style={{color:"inherit", textDecoration:"none"}}>
-          <div className="trapzoid">
-          <span className="logo">Futa Bus</span>
+          <div className="Left_container">
+          {user ? <div className="left_nav">
+            <div className="Booking_navbar" onClick={handleMoveToBoooking}>Booking</div>
+            <div className="Booking_navbar" onClick={handleMoveToUserTicket}>My Ticket</div>
+          </div> : (
+            <div className="left_nav">
+               <div className="Booking_navbar" onClick={handleMoveToBoooking}>Booking</div>
+            </div>
+          )}
           </div>
-
-        </Link>   {/* if there is user show his username otherwise show this div.  */}
-        {user ? <div>
-          <span style={{color: "black"}}><PersonIcon/> Hello {user.email}</span>
-          <Button variant="contained" style={{background:"white", color:"black", marginLeft:"1rem"}} className="navButton" onClick={() => handleLogout()} >Logout</Button>
-        </div> : (
-          <div className="navItems">
-            <button className="navButton" onClick={() => handleMoveToRegister()}>Register</button>
-            <button className="navButton" onClick={() => handleMoveToLogin()} >Login</button>
+          <Link to="/" className="trapzoid" >
+            <span className="logo">Futa Bus</span>
+          </Link>   {/* if there is user show his username otherwise show this div.  */}
+          <div className="Right_Container">
+          {user ? <div className="right_nav">
+            <span style={{color: "black"}}><PersonIcon/> Hello {user.email}</span>
+            <Button variant="contained" style={{background:"white", color:"black", marginLeft:"1rem"}} className="navButton" onClick={() => handleLogout()} >Logout</Button>
+          </div> : (
+            <div className="navItems">
+              <button className="navButton" onClick={() => handleMoveToRegister()}>Register</button>
+              <button className="navButton" onClick={() => handleMoveToLogin()} >Login</button>
+            </div>
+          )}
           </div>
-        )}
-      </div>
-      </div>
 
     </div>
   )
