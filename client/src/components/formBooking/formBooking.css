@@ -1,0 +1,52 @@
+.formBooking{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.formBooking_title{
+  width: 100%;
+  font-size: 3vw;
+  text-align: center;
+  font-family: 'clesmont';
+  letter-spacing: 2px;
+  margin-bottom: 5%;
+}
+.Booking_Form{
+  height: 8%;
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.Booking_Form_Value{
+  background-color: rgba(0, 0, 0, 0);
+  width: 95%;
+  height: 60%;
+  font-size: 1.5vw;
+  padding-left: 5%;
+  z-index: 3;
+  &:focus{
+    outline: none;
+  }
+}
+.Booking_Button{
+  height: 6%;
+  background-color: ;
+  color: white;
+  background-color: rgb(255, 204, 192);
+  font-size: 2vw;
+  font-family: "clesmont";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+  margin-top: 5%;
+  z-index: 3;
+}
+.EmptySeat{
+  display: flex;
+  font-size: 1vw;
+}
