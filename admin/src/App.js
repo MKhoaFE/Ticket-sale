@@ -71,7 +71,7 @@ function App() {
                               }
                           />
                       </Route>
-                      <Route path="lines">
+                      <Route path="rides">
                           <Route
                               index
                               element={
