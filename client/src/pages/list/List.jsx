@@ -20,7 +20,8 @@ import { useLocation } from 'react-router-dom';
 const List = () => {
   const [date, setDate] = useState(null);
   const location = useLocation();
-  const destination = new URLSearchParams(location.search).get("destination");
+  const destination = new URLSearchParams(location.search).get("to");
+  const city = new URLSearchParams(location.search).get("from");
   console.log("dest: ", destination)
   const handleDateChange = (newDate) => {
     setDate(newDate);
@@ -34,7 +35,7 @@ const List = () => {
 
   const fetchRides = async () => {
     try {
-      const response = await fetch(`http://localhost:8800/api/rides/search?destination=${destination}`);
+      const response = await fetch(`http://localhost:8800/api/rides/search?from=${city}#to=${destination}`);
       if (!response.ok) {
         throw new Error("Failed to fetch rides");
       }

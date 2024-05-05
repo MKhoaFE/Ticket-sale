@@ -71,6 +71,9 @@ const HeaderSearch = () => {
   const handleDateChange = (newDate) => {
     setDate(newDate);
   };
+  const handleDate1Change = (newDate) => {
+    setDate(newDate);
+  };
   const handleTicketNumberChange = (event) => {
     const value = event.target.value;
     setTicketNumber(value);
@@ -94,13 +97,21 @@ const HeaderSearch = () => {
   };
 
   const handleSearch = ()=>{
-    const _dest = cities.find(
+    const _from = cities.find(
+        (city) => city.Id === selectedCity
+    );
+    const _to = cities.find(
         (city) => city.Id === selectedDestination
     );
-    const destination = _dest.Name.split(' ').slice(1).join(" ")
-    navigate(`/search?destination=${destination}`);
-    
-
+    var city = "";
+    var destination = "";
+    if(_from != null){
+       city = _from.Name.split(' ').slice(1).join(" ")
+    }
+    if(_to != null){
+       destination = _to.Name.split(' ').slice(1).join(" ")
+    }
+    navigate(`/search?from=${city}#to=${destination}`);
   }
 
   // console.log("ticket: ", typeTicket)
@@ -205,10 +216,10 @@ const HeaderSearch = () => {
                       >
                         <label>Ngày về</label>
                         <DatePicker
-                          value={date}
-                          onChange={handleDateChange}
+                          value={date1}
+                          onChange={handleDate1Change}
                           renderInput={(params) => (
-                            <TextField {...params} label="Ngày" />
+                            <TextField {...params} label="Ngày về" />
                           )}
                         />
                       </LocalizationProvider>

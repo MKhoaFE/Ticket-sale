@@ -149,10 +149,11 @@ export const getRideTickets = async (req, res, next) => {
 export const searchRides = async (req, res, next) => {
   try {
     // const cities = req.query.id;
-    const destination = req.query.destination;
+    const destination = req.query.to;
+    const city = req.query.from;
     console.log(destination)
     const listRide = await Ride.find({
-      // cities: cities,
+      from:city,
       to: destination,
       // selectedDestination: selectedDestinationx
     })
