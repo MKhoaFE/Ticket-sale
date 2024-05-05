@@ -13,11 +13,15 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
 import ticketLogo from "../../assets/images/ticket.jpg";
+import { useLocation } from 'react-router-dom';
 
 const List = () => {
   const [date, setDate] = useState(null);
+  const location = useLocation();
+  const destination = new URLSearchParams(location.search).get("destination");
+  console.log("dest: ", destination)
   const handleDateChange = (newDate) => {
     setDate(newDate);
   };
@@ -30,7 +34,7 @@ const List = () => {
 
   const fetchRides = async () => {
     try {
-      const response = await fetch("http://localhost:8800/api/rides");
+      const response = await fetch(`http://localhost:8800/api/rides/search?destination=${destination}`);
       if (!response.ok) {
         throw new Error("Failed to fetch rides");
       }

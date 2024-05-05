@@ -145,3 +145,19 @@ export const getRideTickets = async (req, res, next) => {
     next(err);
   }
 };
+
+export const searchRides = async (req, res, next) => {
+  try {
+    // const cities = req.query.id;
+    const destination = req.query.destination;
+    console.log(destination)
+    const listRide = await Ride.find({
+      // cities: cities,
+      to: destination,
+      // selectedDestination: selectedDestinationx
+    })
+    res.status(200).json(listRide);
+  } catch (error) {
+    next(error);
+  }
+};
