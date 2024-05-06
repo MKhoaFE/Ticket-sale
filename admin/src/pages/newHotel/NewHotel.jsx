@@ -55,8 +55,8 @@ const NewHotel = () => {
         photos: list,
       };
 
-      await axios.post("/hotels", newhotel);
-      handleMoveToHotels("/hotels");
+      await axios.post("/rides", newhotel);
+      handleMoveToHotels("/rides");
     } catch (err) {console.log(err)}
   };
   return (
@@ -104,26 +104,7 @@ const NewHotel = () => {
                   />
                 </div>
               ))}
-              <div className="formInput">
-                <label>Featured</label>
-                <select id="featured" onChange={handleChange}>
-                  <option value={false}>No</option>
-                  <option value={true}>Yes</option>
-                </select>
-              </div>
-              <div className="selectRooms">
-                <label>Rooms</label>
-                <select id="rooms" multiple onChange={handleSelect}>
-                  {loading
-                    ? "loading"
-                    : data &&
-                      data.map((room) => (
-                        <option key={room._id} value={room._id}>
-                          {room.title}
-                        </option>
-                      ))}
-                </select>
-              </div>
+              
               <button onClick={handleClick}>Send</button>
             </form>
           </div>

@@ -25,12 +25,16 @@ const RideSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  sum_distance: {
+  distance: {
     type: String,
     required: true,
   },
   slot: {
     type: Number,
+    required: true,
+  },
+  price: {
+    type: String,
     required: true,
   },
   tickets: [
