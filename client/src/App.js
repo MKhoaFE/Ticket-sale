@@ -4,6 +4,7 @@ import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import Booking from "./pages/booking/booking";
 import UserTIcket from "./pages/userTicket/UserTicket";
+import Search from "./pages/search/Search";
 function App() {
   return (
     <BrowserRouter>
@@ -13,6 +14,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/booking" element={<Booking />} />
         <Route path="/myticket" element={<UserTIcket />} />
+        <Route path="/search" element={<Search />} />
       </Routes>
     </BrowserRouter>
   );

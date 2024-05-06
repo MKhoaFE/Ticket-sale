@@ -81,7 +81,7 @@ export const updateRide = async (req, res, next) => {
 
 export const deleteRide = async (req, res, next) => {
   try {
-    await Hotel.findByIdAndDelete(req.params.id);
+    await Ride.findByIdAndDelete(req.params.id);
     res.status(200).json("Hotel has been Deleted");
   } catch (error) {
     next(error);
@@ -143,5 +143,22 @@ export const getRideTickets = async (req, res, next) => {
     res.status(200).json(list);
   } catch (err) {
     next(err);
+  }
+};
+
+export const searchRides = async (req, res, next) => {
+  try {
+    // const cities = req.query.id;
+    const destination = req.query.to;
+    const city = req.query.from;
+    console.log(destination)
+    const listRide = await Ride.find({
+      from:city,
+      to: destination,
+      // selectedDestination: selectedDestinationx
+    })
+    res.status(200).json(listRide);
+  } catch (error) {
+    next(error);
   }
 };

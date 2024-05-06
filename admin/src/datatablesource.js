@@ -69,7 +69,7 @@ export const hotelColumns = [
   },
   {
     field: "price",
-    headerName: "Price for every ticket",
+    headerName: "Price ticket",
     width: 100,
   },
 ];
