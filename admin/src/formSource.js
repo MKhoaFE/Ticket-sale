@@ -63,7 +63,7 @@ export const productInputs = [
     placeholder: "in stock",
   },
 ];
-
+export const busLineInput = [];
 export const hotelInputs = [
   {
     id: "car_type",

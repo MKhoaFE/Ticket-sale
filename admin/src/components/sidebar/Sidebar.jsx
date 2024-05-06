@@ -67,6 +67,12 @@ const Sidebar = () => {
                   <Link to="/rides" style={{ textDecoration: "none" }}>
                       <li>
                           <StoreIcon className="icon" />
+                          <span>Bus line (tuyến xe)</span>
+                      </li>
+                  </Link>
+                  <Link to="/rides" style={{ textDecoration: "none" }}>
+                      <li>
+                          <StoreIcon className="icon" />
                           <span>Rides (chuyến xe)</span>
                       </li>
                   </Link>

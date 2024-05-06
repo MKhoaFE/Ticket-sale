@@ -18,5 +18,6 @@ router.post("/", createRide);
 router.put("/:id", updateRide);
 router.delete("/:id", deleteRide);
 router.get("/find/:id", getRide);
+
 router.get("/search", searchRides);
 export default router;
