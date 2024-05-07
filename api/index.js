@@ -4,8 +4,7 @@ import authRoute from "./routes/auth.js";
 import usersRoute from "./routes/users.js";
 import rideRoute from "./routes/Ride.route.js";
 import userTicketRoute from "./routes/userticket.js";
-// import roomsRoute from "./routes/rooms.js";
-// import bookingsRoute from "./routes/bookings.js";
+import ticketRoute from "./routes/Ticket.route.js";
 import statisticRoute from "./routes/statisticRouter.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
@@ -46,7 +45,7 @@ app.use("/api/users", usersRoute);
 app.use("/api/statistic", statisticRoute);
 app.use("/api/rides", rideRoute);
 app.use("/api/userticket", userTicketRoute);
-
+app.use("/api/tickets", ticketRoute);
 const job1 = schedule.scheduleJob("1 * *", updateMonthly);
 const job2 = schedule.scheduleJob("0 * * *", updateDaily);
 //Error Handler Middleware

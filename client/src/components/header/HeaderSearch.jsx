@@ -72,7 +72,7 @@ const HeaderSearch = () => {
     setDate(newDate);
   };
   const handleDate1Change = (newDate) => {
-    setDate(newDate);
+    setDate1(newDate);
   };
   const handleTicketNumberChange = (event) => {
     const value = event.target.value;
@@ -103,15 +103,26 @@ const HeaderSearch = () => {
     const _to = cities.find(
         (city) => city.Id === selectedDestination
     );
+    
     var city = "";
     var destination = "";
     if(_from != null){
-       city = _from.Name.split(' ').slice(1).join(" ")
+       city = _from.Name
     }
     if(_to != null){
-       destination = _to.Name.split(' ').slice(1).join(" ")
+       destination = _to.Name
     }
-    navigate(`/search?from=${city}#to=${destination}`);
+
+    const regexCity = new RegExp(`\\b${city}\\b`, 'i');
+    const regexDestination = new RegExp(`\\b${destination}\\b`, 'i');
+    // Thực hiện chuyển hướng với truy vấn tương ứng
+    navigate(`/search?from=${encodeURIComponent(city)}&to=${encodeURIComponent(destination)}`);
+    console.log("đi1", city)
+    console.log("đến1", destination)
+    //console.log("xuất p", date)
+    //navigate(`/search?from=${encodeURIComponent(city)}&to=${encodeURIComponent(destination)}&date=${date}`);
+    //navigate(`/search?from=${city}#to=${destination}`);
+    
   }
 
   // console.log("ticket: ", typeTicket)
@@ -141,7 +152,7 @@ const HeaderSearch = () => {
                   <Box sx={{ minWidth: "10rem" }}>
                     <FormControl>
                       <label>Điểm đi</label>
-                      <InputLabel id="city-label">Điểm đi</InputLabel>
+                      <InputLabel id="city-label" style={{marginTop: "25px"}}>{selectedCity ? '': 'Chọn điểm đi'}</InputLabel>
                       <Select
                         labelId="city-label"
                         id="city"
@@ -158,7 +169,7 @@ const HeaderSearch = () => {
                       </Select>
                     </FormControl>
                   </Box>
-                  <div className="icon">
+                  <div className="icon" style={{marginTop:"1.5rem"}}>
                     <MultipleStopIcon
                       style={{
                         height: "100%",
@@ -168,15 +179,16 @@ const HeaderSearch = () => {
                     />
                   </div>
                   <Box sx={{ minWidth: "10rem" }}>
-                    <FormControl>
-                      <InputLabel id="destination-label">Điểm đến</InputLabel>
-                      <Select
-                        labelId="destination-label"
-                        id="destination"
-                        value={selectedDestination}
-                        onChange={handleDestinationChange}
-                        style={{ width: "12rem" }}
-                      >
+                      <FormControl>
+                        <label>Điểm đến</label>
+                        <InputLabel id="destination-label" style={{marginTop: "25px"}}>{selectedDestination ? '': 'Chọn điểm đến'}</InputLabel>
+                        <Select
+                          labelId="destination-label"
+                          id="destination"
+                          value={selectedDestination}
+                          onChange={handleDestinationChange}
+                          style={{ width: "12rem" }}
+                        >
                         <MenuItem value="">Chọn điểm đến</MenuItem>
                         {cities.map((city) => {
                           if (city.Id !== selectedCity) {
@@ -203,7 +215,7 @@ const HeaderSearch = () => {
                         value={date}
                         onChange={handleDateChange}
                         renderInput={(params) => (
-                          <TextField {...params} label="Ngày" />
+                          <TextField {...params} label="Ngày đi" />
                         )}
                       />
                     </LocalizationProvider>
@@ -227,14 +239,16 @@ const HeaderSearch = () => {
                     :null
                   }
                   <Box sx={{ minWidth: "10rem" }}>
+                    <label>Số vé</label>
                     <TextField
                       id="outlined-multiline-flexible"
-                      label="Số vé"
+                      //label="Số vé"
                       multiline
                       maxRows={4}
-                      style={{ width: "12rem" }}
+                      style={{ width: typeTicket? "12rem" : "5rem", display:"flex" }}
                       value={ticketNumber}
                       onChange={handleTicketNumberChange}
+                      
                     />
                   </Box>
                 </div>

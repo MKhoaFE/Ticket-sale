@@ -3,23 +3,29 @@ const RoomSchema = new mongoose.Schema(
   {
     price: {
       type: Number,
-      required: true,
+    },
+    from:{
+      type: String,
+    },
+    to:{
+      type: String,
     },
     seat_number: {
-      type: Number,
-      required: true,
+      type: String,
     },
     car_type: {
       type: String,
-      required: true,
     },
     phone: {
       type: Number,
-      required: true,
     },
     email:{
       type: String,
     },
+    type_ticket:{
+      type: String,
+    },
+
   },
   { timestamps: true }
 );

@@ -76,16 +76,10 @@ const Sidebar = () => {
                           <span>Rides (chuyến xe)</span>
                       </li>
                   </Link>
-                  <Link to="/Schedule" style={{ textDecoration: "none" }}>
-                      <li>
-                          <CreditCardIcon className="icon" />
-                          <span>Schedule</span>
-                      </li>
-                  </Link>
-                  <Link to="/bookings" style={{ textDecoration: "none" }}>
+                  <Link to="/Tickets" style={{ textDecoration: "none" }}>
                       <li>
                           <LocalShippingIcon className="icon" />
-                          <span>Reservation</span>
+                          <span>Ticket</span>
                       </li>
                   </Link>
                   <Link to="/statistic" style={{ textDecoration: "none" }}>

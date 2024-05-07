@@ -31,6 +31,9 @@ const MyTicket = () => {
               <div className="Ticket_Destination">
                 Seat Number: {ticket.SeatNumber}
               </div>
+              <div className="Ticket_Destination">
+                Car type: {ticket.car_type}
+              </div>
             </div>
             <div className="Ticket_Infor_Ride">
               <div className="Ticket_Destination">
