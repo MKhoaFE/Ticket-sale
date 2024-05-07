@@ -107,10 +107,10 @@ const HeaderSearch = () => {
     var city = "";
     var destination = "";
     if(_from != null){
-       city = _from.Name.split(' ').slice(1).join(" ")
+       city = _from.Name
     }
     if(_to != null){
-       destination = _to.Name.split(' ').slice(1).join(" ")
+       destination = _to.Name
     }
 
     const regexCity = new RegExp(`\\b${city}\\b`, 'i');
