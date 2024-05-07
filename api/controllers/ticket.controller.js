@@ -1,5 +1,6 @@
 import Ticket from "../models/Ticket.js";
 
+
 export const getTicket = async (req, res) => {
   try {
     const rides = await Ticket.find();
