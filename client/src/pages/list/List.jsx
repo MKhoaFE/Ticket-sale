@@ -16,8 +16,10 @@ import {
 import { useEffect, useState} from "react";
 import ticketLogo from "../../assets/images/ticket.jpg";
 import { useLocation } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const List = () => {
+  const nav = useNavigate()
   const [date, setDate] = useState(null);
   const location = useLocation();
   const destination = new URLSearchParams(location.search).get("to");
@@ -44,7 +46,11 @@ const List = () => {
     } catch (error) {
       console.error("Error fetching rides:", error);
     }
-  };
+  }; 
+
+  const BookingTicket = (ride) => {
+    nav('/booking', {state:{_id:ride._id}})
+  }
   return (
     <div>
       <Navbar />
@@ -120,7 +126,7 @@ const List = () => {
               </ul> */}
               {rides.map((ride) => (
                 <div key={ride._id}>
-                  <CardActionArea>
+                  <CardActionArea onClick={() => BookingTicket(ride)}>
                     <div className="ticketItem" style={{ display: "flex" }}>
                       <img src={ticketLogo}></img>
                       <div className="wrapper">

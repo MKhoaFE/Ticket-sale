@@ -20,6 +20,9 @@ export const updateSeatEmpty = async (req, res) => {
     $set: {
       "seat.$.empty": false,
     },
+    $inc: {
+      slot: -1, // Trừ đi 1 cho số vé
+    },
   };
 
   try {
@@ -152,16 +155,16 @@ export const searchRides = async (req, res, next) => {
     const city = req.query.from;
     const destination = req.query.to;
     //const date = req.query.date;
-    console.log("đi",city)
-    console.log("đến",destination)
+    console.log("đi", city);
+    console.log("đến", destination);
     //console.log("xuất phát", date)
     const listRide = await Ride.find({
-      from:city,
+      from: city,
       to: destination,
       //date: date
       // selectedDestination: selectedDestinationx
-    })
-    listRide.forEach(ride => {
+    });
+    listRide.forEach((ride) => {
       console.log("Xuất phát:", ride.date);
     });
     res.status(200).json(listRide);

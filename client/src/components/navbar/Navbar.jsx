@@ -38,11 +38,9 @@ const Navbar = () => {
     <div className="navbar">
           <div className="Left_container">
           {user ? <div className="left_nav">
-            <div className="Booking_navbar" onClick={handleMoveToBoooking}>Booking</div>
             <div className="Booking_navbar" onClick={handleMoveToUserTicket}>My Ticket</div>
           </div> : (
             <div className="left_nav">
-               <div className="Booking_navbar" onClick={handleMoveToBoooking}>Booking</div>
             </div>
           )}
           </div>

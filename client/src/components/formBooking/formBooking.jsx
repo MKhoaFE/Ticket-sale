@@ -3,8 +3,12 @@ import { useState,useEffect } from "react";
 import axios from "axios";
 import React, { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const FormBooking = () => {
+  const location = useLocation()
+  const nav = useNavigate()
   const  User  = useContext(AuthContext);
   const [Email, SetEmail] = useState();
   const [Name, SetName] = useState();
@@ -19,15 +23,15 @@ const FormBooking = () => {
     })
     .catch((err) => console.log(err))
 
-    axios.post(`http://localhost:8800/api/userticket`, {email: Email, name: Name, SeatNumber: seat, RideId: ride._id, from: ride.from, to:ride.to,date: ride.date,time_go: ride.time_go, time_arrival: ride.time_arrival, payment: true, phone: Phone})
+    axios.post(`http://localhost:8800/api/userticket`, {email: Email, name: Name, SeatNumber: seat, car_type:ride.car_type , RideId: ride._id, from: ride.from, to:ride.to,date: ride.date,time_go: ride.time_go, time_arrival: ride.time_arrival, payment: true, phone: Phone})
     .then((res) => {
-      console.log(res)
+      nav('/myticket')
     })
     .catch((err) => console.log(err))
 
   }
   useEffect(() => {
-    axios.post(`http://localhost:8800/api/rides/byId`, {id:"6634c0b3e1df42fccdf2def8"})
+    axios.post(`http://localhost:8800/api/rides/byId`, {id:location.state._id})
         .then((res) => {
           setSeatEmpty(res.data.seat)
           setRide(res.data)

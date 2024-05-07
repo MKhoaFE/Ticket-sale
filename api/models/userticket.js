@@ -22,6 +22,10 @@ const UserTicketSchema = new mongoose.Schema({
   date: {
     type: String,
   },
+  car_type: {
+    type: String,
+    required: true,
+  },
   time_go: {
     type: String,
   },
