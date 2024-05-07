@@ -35,7 +35,7 @@ const List = () => {
 
   const fetchRides = async () => {
     try {
-      const response = await fetch(`http://localhost:8800/api/rides/search?from=${city}#to=${destination}`);
+      const response = await fetch(`http://localhost:8800/api/rides/search?from=${city}&to=${destination}`);
       if (!response.ok) {
         throw new Error("Failed to fetch rides");
       }
