@@ -99,33 +99,48 @@ export const roomColumns = [
   
 ];
 
-export const bookingColumns = [
+export const ticketColumns = [
   { field: "_id", headerName: "ID", width: 100 },
   {
-    field: "hotelName",
-    headerName: "HotelName",
-    width: 200,
-  },
-  {
-    field: "roomNumber",
-    headerName: "RoomNumber",
+    field: "from",
+    headerName: "From",
     width: 120,
   },
   {
-    field: "price",
+    field: "to",
+    headerName: "To",
+    width: 120,
+  },
+  {
+    field: "price_ticket",
     headerName: "Price",
     width: 100,
   },
   {
-    field: "startDate",
-    headerName: "Check In",
+    field: "email",
+    headerName: "Email user",
     width: 250, 
   },
   {
-    field: "endDate",
-    headerName: "Check Out",
-    width: 250,
-  }
+    field: "phone_user",
+    headerName: "Phone",
+    width: 150,
+  },
+  {
+    field: "seat_number_user",
+    headerName: "Seat Number",
+    width: 100,
+  },
+  {
+    field: "type_ticket",
+    headerName: "Ticket type",
+    width: 100,
+  },
+  {
+    field: "car_type",
+    headerName: "Car type",
+    width: 100,
+  },
 ];
 
   

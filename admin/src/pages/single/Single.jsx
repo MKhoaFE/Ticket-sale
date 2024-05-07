@@ -11,8 +11,9 @@ import { useState, useEffect } from "react";
 const Single = () => {
 
   const userId = window.location.pathname.split("/").pop();
-  
+  const rideId = window.location.pathname.split("/").pop();
   const [user, setUser] = useState(null);
+  const [ride, setRide] = useState(null);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -25,8 +26,11 @@ const Single = () => {
     };
     fetchUser();
   }, [userId]);
+  
+
 
   if (!user) return <div>Loading...</div>;
+
 
   return (
     <div className="single">
