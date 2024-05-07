@@ -63,31 +63,31 @@ export const productInputs = [
     placeholder: "in stock",
   },
 ];
-
+export const busLineInput = [];
 export const hotelInputs = [
   {
-    id: "name",
-    label: "Name",
+    id: "car_type",
+    label: "Car Type",
     type: "text",
-    placeholder: "My Hotel",
+    placeholder: "VIP",
   },
   {
-    id: "type",
-    label: "Type",
+    id: "from",
+    label: "From",
     type: "text",
-    placeholder: "hotel",
+    placeholder: "Ho Chi Minh",
   },
   {
-    id: "city",
-    label: "City",
+    id: "to",
+    label: "To",
     type: "text",
-    placeholder: "New York",
+    placeholder: "Hue",
   },
   {
-    id: "address",
-    label: "Address",
-    type: "text",
-    placeholder: "elton st, 216",
+    id: "slot",
+    label: "Slot",
+    type: "number",
+    placeholder: "max 36 for normal, and 28 for VIP",
   },
   {
     id: "distance",
@@ -96,22 +96,28 @@ export const hotelInputs = [
     placeholder: "500",
   },
   {
-    id: "title",
-    label: "Title",
+    id: "price",
+    label: "Price per ticket",
     type: "text",
-    placeholder: "The best Hotel",
+    placeholder: "$30",
   },
   {
-    id: "desc",
-    label: "Description",
-    type: "text",
-    placeholder: "description",
+    id: "date",
+    label: "Date",
+    type: "date",
+    placeholder: "4/8/2024",
   },
   {
-    id: "cheapestPrice",
-    label: "Price",
+    id: "time_go",
+    label: "Start time:",
     type: "text",
-    placeholder: "100",
+    placeholder: "12AM",
+  },
+  {
+    id: "time_arrival",
+    label: "End time:",
+    type: "text",
+    placeholder: "12PM",
   },
 ];
 

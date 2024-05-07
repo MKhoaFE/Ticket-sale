@@ -3,7 +3,8 @@ import Header from "../../components/header/Header";
 import Navbar from "../../components/navbar/Navbar";
 import FormBooking from "../../components/formBooking/formBooking";
 import "./booking.css";
-const booking = () => {
+const Booking = () => {
+
     return (
       <div>
         <Navbar />
@@ -17,4 +18,4 @@ const booking = () => {
     );
   };
   
-  export default booking;
+  export default Booking;

@@ -1,23 +1,53 @@
 import "./formBooking.css"
 import { useState,useEffect } from "react";
 import axios from "axios";
+import React, { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 const FormBooking = () => {
+  const  User  = useContext(AuthContext);
   const [Email, SetEmail] = useState();
+  const [Name, SetName] = useState();
   const [Phone, SetPhone] = useState();
-  const [seat, setSeat] = useState([])
+  const [seatEmpty, setSeatEmpty] = useState([])
+  const [ride, setRide] = useState({})
+  const [seat,setSeat] = useState(0)
+  const handleBookingTicket = () => {
+    axios.post(`http://localhost:8800/api/rides/byId/seat`,{RideId: ride._id,seat: seat})
+    .then((res) => {
+      console.log("he",res.data)
+    })
+    .catch((err) => console.log(err))
+
+    axios.post(`http://localhost:8800/api/userticket`, {email: Email, name: Name, SeatNumber: seat, RideId: ride._id, from: ride.from, to:ride.to,date: ride.date,time_go: ride.time_go, time_arrival: ride.time_arrival, payment: true, phone: Phone})
+    .then((res) => {
+      console.log(res)
+    })
+    .catch((err) => console.log(err))
+
+  }
   useEffect(() => {
     axios.post(`http://localhost:8800/api/rides/byId`, {id:"6634c0b3e1df42fccdf2def8"})
         .then((res) => {
-          setSeat(res.data.seat)
-          console.log(res)
+          setSeatEmpty(res.data.seat)
+          setRide(res.data)
+          console.log(res.data)
         })
         .catch((err) => console.log(err))
 
   }, [])
+  console.log(seatEmpty)
   return (
     <div className="formBooking">
-      <div className="formBooking_title">Nhập email và số điện thoại để đặt vé</div>
+      <div className="User_Infor">
+      <div className="formBooking_title">Thông tin khách hàng</div>
+      <div className="Booking_Form">
+        <input
+          className="Booking_Form_Value"
+          placeholder="Your name"
+          onChange={(values) => SetName(values.target.value)}
+        />
+      </div>
       <div className="Booking_Form">
         <input
           className="Booking_Form_Value"
@@ -39,11 +69,16 @@ const FormBooking = () => {
           onChange={(values) => setSeat(values.target.value)}
         />
       </div>
-      <div className="EmptySeat">Số ghế còn trống: <p>{" "}</p> {seat.map((seat,id) => {
+      <div className="EmptySeat">Số ghế còn trống: <p>{" "}</p> {seatEmpty.map((seat,id) => {
           return seat.empty && <div key={id}> {seat.number}, </div>
         })}</div>
-      <div  className="Booking_Button">
+      </div>
+      <div className="Make_Payment">
+        <div className="Make_Payment_Test"> Thanh toán</div>
+
+        <div  className="Booking_Button_Test" onClick={handleBookingTicket}>
         Đặt vé
+        </div>
       </div>
     </div>
   )

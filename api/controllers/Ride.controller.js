@@ -9,6 +9,27 @@ export const getAllRides = async (req, res) => {
   }
 };
 
+export const updateSeatEmpty = async (req, res) => {
+  console.log(req.body);
+  const query = {
+    "seat.number": parseInt(req.body.seat),
+    _id: req.body.RideId,
+  };
+
+  const updateDoc = {
+    $set: {
+      "seat.$.empty": false,
+    },
+  };
+
+  try {
+    const result = await Ride.updateOne(query, updateDoc);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 export const getRidesById = async (req, res, next) => {
   try {
     const ride = await Ride.findById(req.body.id);
@@ -60,7 +81,7 @@ export const updateRide = async (req, res, next) => {
 
 export const deleteRide = async (req, res, next) => {
   try {
-    await Hotel.findByIdAndDelete(req.params.id);
+    await Ride.findByIdAndDelete(req.params.id);
     res.status(200).json("Hotel has been Deleted");
   } catch (error) {
     next(error);
@@ -122,5 +143,22 @@ export const getRideTickets = async (req, res, next) => {
     res.status(200).json(list);
   } catch (err) {
     next(err);
+  }
+};
+
+export const searchRides = async (req, res, next) => {
+  try {
+    // const cities = req.query.id;
+    const destination = req.query.to;
+    const city = req.query.from;
+    console.log(destination)
+    const listRide = await Ride.find({
+      from:city,
+      to: destination,
+      // selectedDestination: selectedDestinationx
+    })
+    res.status(200).json(listRide);
+  } catch (error) {
+    next(error);
   }
 };

@@ -22,6 +22,7 @@ import MultipleStopIcon from "@mui/icons-material/MultipleStop";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import HeaderSearch from "./HeaderSearch";
 
 const Header = ({ type }) => {
   const [age, setAge] = React.useState("");
@@ -103,122 +104,7 @@ const Header = ({ type }) => {
               <img src={logo} alt="" />
             </div>
 
-            <div className="headerSearch">
-              <div className="top">
-                <FormControlLabel
-                  control={<Checkbox />}
-                  style={{ color: "black" }}
-                  label="Một chiều"
-                />
-                <FormControlLabel
-                  control={<Checkbox />}
-                  style={{ color: "black" }}
-                  label="Khứ hồi"
-                />
-              </div>
-              <div className="mid">
-                <div className="formInput1">
-                  <Box sx={{ minWidth: "10rem" }}>
-                    <FormControl>
-                      <InputLabel id="city-label">Điểm đi</InputLabel>
-                      <Select
-                        labelId="city-label"
-                        id="city"
-                        value={selectedCity}
-                        onChange={handleCityChange}
-                        style={{ width: "12rem" }}
-                      >
-                        <MenuItem value="">Chọn điểm đi</MenuItem>
-                        {cities.map((city) => (
-                          <MenuItem key={city.Id} value={city.Id}>
-                            {city.Name}
-                          </MenuItem>
-                        ))}
-                      </Select>
-                    </FormControl>
-                  </Box>
-                  <div className="icon">
-                    <MultipleStopIcon
-                      style={{
-                        height: "100%",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    />
-                  </div>
-                  <Box sx={{ minWidth: "10rem" }}>
-                    <FormControl>
-                      <InputLabel id="destination-label">Điểm đến</InputLabel>
-                      <Select
-                        labelId="destination-label"
-                        id="destination"
-                        value={selectedDestination}
-                        onChange={handleDestinationChange}
-                        style={{ width: "12rem" }}
-                      >
-                        <MenuItem value="">Chọn điểm đến</MenuItem>
-                        {cities.map((city) => {
-                          if (city.Id !== selectedCity) {
-                            return (
-                              <MenuItem key={city.Id} value={city.Id}>
-                                {city.Name}
-                              </MenuItem>
-                            );
-                          }
-                          return null;
-                        })}
-                      </Select>
-                    </FormControl>
-                  </Box>
-                </div>
-                <div className="formInput2">
-                  <Box sx={{ minWidth: "10rem" }}>
-                    <LocalizationProvider
-                      dateAdapter={AdapterDayjs}
-                      style={{ width: "12rem" }}
-                    >
-                      <DatePicker
-                        value={date}
-                        onChange={handleDateChange}
-                        renderInput={(params) => (
-                          <TextField {...params} label="Ngày" />
-                        )}
-                      />
-                    </LocalizationProvider>
-                  </Box>
-                  <Box sx={{ minWidth: "10rem" }}>
-                    <TextField
-                      id="outlined-multiline-flexible"
-                      label="Số vé"
-                      multiline
-                      maxRows={4}
-                      style={{ width: "12rem" }}
-                      value={ticketNumber}
-                      onChange={handleTicketNumberChange}
-                    />
-                  </Box>
-                </div>
-              </div>
-              <div className="bottom">
-                <div className="wrap">
-                  <Link to="/hotels">
-                    <Button
-                      variant="outlined"
-                      style={{
-                        backgroundColor: isSearchEnabled
-                          ? "#FFA500"
-                          : "#FFCCC0",
-                        color: "white",
-                        padding: "10px 80px",
-                      }}
-                      disabled={!isSearchEnabled}
-                    >
-                      Search
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-            </div>
+            <HeaderSearch />
           </>
         )}
       </div>

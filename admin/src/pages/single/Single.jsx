@@ -54,14 +54,14 @@ const Single = () => {
                   <span className="itemValue">{user.phone}</span>
                 </div>
                 <div className="detailItem">
-                  <span className="itemKey">Country:</span>
+                  <span className="itemKey">Gender:</span>
                   <span className="itemValue">
-                    {user.country}
+                    {user.gender}
                   </span>
                 </div>
                 <div className="detailItem">
-                  <span className="itemKey">City:</span>
-                  <span className="itemValue">{user.city}</span>
+                  <span className="itemKey">Address:</span>
+                  <span className="itemValue">{user.address}</span>
                 </div>
               </div>
             </div>

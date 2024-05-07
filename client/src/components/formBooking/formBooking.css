@@ -1,13 +1,39 @@
 .formBooking{
   height: 100vh;
+  width: 100vw;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
 }
+.User_Infor{
+  display: flex;
+  width: 50%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.Make_Payment{
+  display: flex;
+  width: 50%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.Make_Payment_Test{
+  width: 100%;
+  font-size: 2vw;
+  text-align: center;
+  font-family: 'clesmont';
+  letter-spacing: 2px;
+  margin-bottom: 5%;
+}
+
 .formBooking_title{
   width: 100%;
-  font-size: 3vw;
+  font-size: 2vw;
   text-align: center;
   font-family: 'clesmont';
   letter-spacing: 2px;
@@ -24,15 +50,15 @@
 .Booking_Form_Value{
   background-color: rgba(0, 0, 0, 0);
   width: 95%;
-  height: 60%;
-  font-size: 1.5vw;
+  height: 50%;
+  font-size: 1.3vw;
   padding-left: 5%;
   z-index: 3;
   &:focus{
     outline: none;
   }
 }
-.Booking_Button{
+.Booking_Button_Test{
   height: 6%;
   background-color: ;
   color: white;
@@ -44,7 +70,13 @@
   align-items: center;
   width: 20%;
   margin-top: 5%;
-  z-index: 3;
+  cursor: pointer;
+  &:focus{
+    background-color: rgb(250, 155, 134);
+  }
+}
+.Booking_Button_Test:hover{
+  background-color: rgb(250, 155, 134);
 }
 .EmptySeat{
   display: flex;
